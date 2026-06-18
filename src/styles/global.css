@@ -341,6 +341,30 @@ textarea:focus {
   font-size: 0.92rem;
 }
 
+.action-network-signup {
+  color: var(--ink);
+}
+
+.action-network-signup #can_embed_form,
+.action-network-signup .can_embed {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.action-network-signup #can_embed_form input[type="submit"],
+.action-network-signup #can_embed_form .button,
+.action-network-signup .can_embed input[type="submit"] {
+  border-radius: 6px;
+  background-color: var(--yimby-green);
+  font-weight: 900;
+}
+
+.action-network-signup #can_embed_form input[type="submit"]:hover,
+.action-network-signup #can_embed_form .button:hover,
+.action-network-signup .can_embed input[type="submit"]:hover {
+  background-color: var(--deep-green);
+}
+
 .support-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

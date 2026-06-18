@@ -4,28 +4,67 @@ interface Props {
 }
 
 const {compact = false} = Astro.props
+const actionNetworkFormUrl = import.meta.env.PUBLIC_ACTION_NETWORK_FORM_URL
+
+function buildActionNetworkEmbed(formUrl?: string) {
+  if (!formUrl) return null
+
+  try {
+    const url = new URL(formUrl)
+    const [, actionType, slug] = url.pathname.split('/')
+
+    if (url.hostname !== 'actionnetwork.org' || !actionType || !slug) {
+      return null
+    }
+
+    const scriptUrl = new URL(`/widgets/v3/${actionType}/${slug}`, url.origin)
+    scriptUrl.searchParams.set('format', 'js')
+    scriptUrl.searchParams.set('source', 'widget')
+    scriptUrl.searchParams.set('clear_id', 'true')
+
+    return {
+      scriptUrl: scriptUrl.toString(),
+      targetId: `can-${actionType.slice(0, -1)}-area-${slug}`
+    }
+  } catch {
+    return null
+  }
+}
+
+const actionNetworkEmbed = buildActionNetworkEmbed(actionNetworkFormUrl)
 ---
 
-<form
-  class:list={['signup-form', compact && 'signup-form--compact']}
-  name="supporter-signup"
-  method="post"
-  data-netlify="true"
->
-  <input type="hidden" name="form-name" value="supporter-signup" />
-  <label>
-    <span>Name</span>
-    <input name="name" type="text" autocomplete="name" placeholder="Your name" />
-  </label>
-  <label>
-    <span>Email</span>
-    <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
-  </label>
-  <label>
-    <span>Postcode</span>
-    <input name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="5000" />
-  </label>
-  <button type="submit">Join the list</button>
-  <p>We will use this to send occasional YIMBY Adelaide updates. Payment support will come later.</p>
-</form>
-
+{
+  actionNetworkEmbed ? (
+    <div class:list={['signup-form action-network-signup', compact && 'signup-form--compact']}>
+      <link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
+      <script is:inline src={actionNetworkEmbed.scriptUrl}></script>
+      <div id={actionNetworkEmbed.targetId} style="width: 100%">
+        <!-- Action Network inserts the embedded form here. -->
+      </div>
+    </div>
+  ) : (
+    <form
+      class:list={['signup-form', compact && 'signup-form--compact']}
+      name="supporter-signup"
+      method="post"
+      data-netlify="true"
+    >
+      <input type="hidden" name="form-name" value="supporter-signup" />
+      <label>
+        <span>Name</span>
+        <input name="name" type="text" autocomplete="name" placeholder="Your name" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      </label>
+      <label>
+        <span>Postcode</span>
+        <input name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="5000" />
+      </label>
+      <button type="submit">Join the list</button>
+      <p>We will use this to send occasional YIMBY Adelaide updates. Payment support will come later.</p>
+    </form>
+  )
+}
