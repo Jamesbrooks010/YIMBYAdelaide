@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string
+  description?: string
+}
+
+const {title, description = 'YIMBY Adelaide supports abundant, affordable, climate-friendly housing.'} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+

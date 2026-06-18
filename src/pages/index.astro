@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import {client, hasSanityConfig} from '@/lib/sanity'
+
+type Article = {
+  title: string
+  summary?: string
+  slug?: {current?: string}
+  publishedAt?: string
+}
+
+const fallbackArticles: Article[] = [
+  {
+    title: 'More homes near jobs, schools, and transport',
+    summary: 'A starter article for the YIMBY Adelaide site while Sanity content is being configured.'
+  },
+  {
+    title: 'A practical housing agenda for Adelaide',
+    summary: 'Use Sanity Studio to replace this placeholder with campaign updates and policy notes.'
+  }
+]
+
+const articles = hasSanityConfig && client
+  ? await client.fetch<Article[]>(
+      `*[_type == "article"] | order(publishedAt desc)[0...6] {
+        title,
+        summary,
+        slug,
+        publishedAt
+      }`
+    )
+  : fallbackArticles
+---
+
+<BaseLayout title="YIMBY Adelaide">
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">YIMBY Adelaide</p>
+        <h1>More homes. Better choices. A fairer Adelaide.</h1>
+        <p>
+          We support abundant, affordable, climate-friendly housing close to the places people already live,
+          work, study, and gather.
+        </p>
+        <div class="actions">
+          <a class="button" href="mailto:hello@yimbyadelaide.org">Get involved</a>
+          <a class="button button--secondary" href="#updates">Read updates</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="updates">
+      <div class="section__header">
+        <p class="eyebrow">Updates</p>
+        <h2>Latest notes</h2>
+      </div>
+      <div class="article-grid">
+        {articles.map((article) => (
+          <article class="article-card">
+            <p class="article-card__date">
+              {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-AU') : 'Draft'}
+            </p>
+            <h3>{article.title}</h3>
+            {article.summary && <p>{article.summary}</p>}
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
