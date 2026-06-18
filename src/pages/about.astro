@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SignupForm from '@/components/SignupForm.astro'
+---
+
+<BaseLayout
+  title="About | YIMBY Adelaide"
+  description="About YIMBY Adelaide and the case for more homes, better choices, and a fairer city."
+>
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">About</p>
+      <h1>We want Adelaide to welcome more neighbours.</h1>
+      <p>
+        YIMBY Adelaide is a pro-housing community for people who believe our city should make room
+        for renters, first-home buyers, growing families, students, older people, and everyone who
+        wants a fair chance to live near opportunity.
+      </p>
+    </section>
+
+    <section class="section split">
+      <div>
+        <p class="eyebrow">What We Stand For</p>
+        <h2>More homes where people need them.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          Adelaide can grow without losing what makes it special. That means allowing more housing
+          near transport, jobs, schools, shops, parks, and existing services.
+        </p>
+        <p>
+          We support practical planning reform, better use of well-located land, and a public
+          conversation that treats housing abundance as civic infrastructure.
+        </p>
+      </div>
+    </section>
+
+    <section class="section values">
+      <article>
+        <span>01</span>
+        <h3>Abundance</h3>
+        <p>More homes means more choices, less pressure, and a city that can welcome the next generation.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Access</h3>
+        <p>People should be able to live near the places, services, and communities that shape their lives.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Sustainability</h3>
+        <p>Well-located homes reduce car dependence and make better use of existing infrastructure.</p>
+      </article>
+    </section>
+
+    <section class="section signup-band" id="signup">
+      <div>
+        <p class="eyebrow">Join Us</p>
+        <h2>Help build the pro-housing voice Adelaide needs.</h2>
+      </div>
+      <SignupForm compact />
+    </section>
+  </main>
+</BaseLayout>
+

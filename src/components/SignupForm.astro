@@ -1,0 +1,31 @@
+---
+interface Props {
+  compact?: boolean
+}
+
+const {compact = false} = Astro.props
+---
+
+<form
+  class:list={['signup-form', compact && 'signup-form--compact']}
+  name="supporter-signup"
+  method="post"
+  data-netlify="true"
+>
+  <input type="hidden" name="form-name" value="supporter-signup" />
+  <label>
+    <span>Name</span>
+    <input name="name" type="text" autocomplete="name" placeholder="Your name" />
+  </label>
+  <label>
+    <span>Email</span>
+    <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+  </label>
+  <label>
+    <span>Postcode</span>
+    <input name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="5000" />
+  </label>
+  <button type="submit">Join the list</button>
+  <p>We will use this to send occasional YIMBY Adelaide updates. Payment support will come later.</p>
+</form>
+

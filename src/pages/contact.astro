@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SignupForm from '@/components/SignupForm.astro'
+---
+
+<BaseLayout
+  title="Contact | YIMBY Adelaide"
+  description="Contact YIMBY Adelaide, join the supporter list, or send a message."
+>
+  <main>
+    <section class="page-hero page-hero--contact">
+      <p class="eyebrow">Contact</p>
+      <h1>Talk to us about housing in Adelaide.</h1>
+      <p>
+        Send a message, join the supporter list, or get in touch about campaigns, media,
+        volunteering, and local planning issues.
+      </p>
+    </section>
+
+    <section class="section contact-grid">
+      <form class="contact-form" name="contact" method="post" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" autocomplete="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="7" required></textarea>
+        </label>
+        <button type="submit">Send message</button>
+      </form>
+
+      <aside class="contact-aside">
+        <div>
+          <p class="eyebrow">Email</p>
+          <a href="mailto:hello@yimbyadelaide.org">hello@yimbyadelaide.org</a>
+        </div>
+        <div>
+          <p class="eyebrow">Supporter Updates</p>
+          <SignupForm compact />
+        </div>
+      </aside>
+    </section>
+  </main>
+</BaseLayout>

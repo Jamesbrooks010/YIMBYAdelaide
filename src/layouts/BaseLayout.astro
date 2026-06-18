@@ -1,10 +1,17 @@
 ---
+import '@/styles/global.css'
+
 interface Props {
   title: string
   description?: string
 }
 
 const {title, description = 'YIMBY Adelaide supports abundant, affordable, climate-friendly housing.'} = Astro.props
+const navigation = [
+  {label: 'Home', href: '/'},
+  {label: 'About', href: '/about'},
+  {label: 'Contact', href: '/contact'}
+]
 ---
 
 <!doctype html>
@@ -14,10 +21,26 @@ const {title, description = 'YIMBY Adelaide supports abundant, affordable, clima
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="YIMBY Adelaide home">
+        <img src="/yimby-adelaide-logo.png" alt="" />
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="header-cta" href="/#signup">Sign up</a>
+    </header>
     <slot />
+    <footer class="site-footer">
+      <div>
+        <img src="/yimby-adelaide-logo.png" alt="YIMBY Adelaide" />
+        <p>More homes, better choices, a fairer Adelaide.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </footer>
   </body>
 </html>
-

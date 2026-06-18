@@ -1,35 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import {client, hasSanityConfig} from '@/lib/sanity'
-
-type Article = {
-  title: string
-  summary?: string
-  slug?: {current?: string}
-  publishedAt?: string
-}
-
-const fallbackArticles: Article[] = [
-  {
-    title: 'More homes near jobs, schools, and transport',
-    summary: 'A starter article for the YIMBY Adelaide site while Sanity content is being configured.'
-  },
-  {
-    title: 'A practical housing agenda for Adelaide',
-    summary: 'Use Sanity Studio to replace this placeholder with campaign updates and policy notes.'
-  }
-]
-
-const articles = hasSanityConfig && client
-  ? await client.fetch<Article[]>(
-      `*[_type == "article"] | order(publishedAt desc)[0...6] {
-        title,
-        summary,
-        slug,
-        publishedAt
-      }`
-    )
-  : fallbackArticles
+import SignupForm from '@/components/SignupForm.astro'
 ---
 
 <BaseLayout title="YIMBY Adelaide">
@@ -39,33 +10,78 @@ const articles = hasSanityConfig && client
         <p class="eyebrow">YIMBY Adelaide</p>
         <h1>More homes. Better choices. A fairer Adelaide.</h1>
         <p>
-          We support abundant, affordable, climate-friendly housing close to the places people already live,
-          work, study, and gather.
+          A local pro-housing voice for abundant, affordable, climate-friendly homes close to the
+          places people already live, work, study, and gather.
         </p>
         <div class="actions">
-          <a class="button" href="mailto:hello@yimbyadelaide.org">Get involved</a>
-          <a class="button button--secondary" href="#updates">Read updates</a>
+          <a class="button" href="#signup">Join the list</a>
+          <a class="button button--secondary" href="/about">About us</a>
         </div>
+      </div>
+      <div class="hero__mark" aria-hidden="true">
+        <img src="/yimby-adelaide-logo.png" alt="" />
       </div>
     </section>
 
-    <section class="section" id="updates">
+    <section class="section palette-section">
       <div class="section__header">
-        <p class="eyebrow">Updates</p>
-        <h2>Latest notes</h2>
+        <p class="eyebrow">Brand Palette</p>
+        <h2>Bright, civic, and local.</h2>
+        <p>The first visual system uses the logo colours as the source of truth.</p>
       </div>
-      <div class="article-grid">
-        {articles.map((article) => (
-          <article class="article-card">
-            <p class="article-card__date">
-              {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-AU') : 'Draft'}
-            </p>
-            <h3>{article.title}</h3>
-            {article.summary && <p>{article.summary}</p>}
-          </article>
-        ))}
+      <div class="swatches" aria-label="YIMBY Adelaide colour palette">
+        <div style="--swatch: #00843d"><span>YIMBY Green</span><strong>#00843D</strong></div>
+        <div style="--swatch: #0788b5"><span>Adelaide Blue</span><strong>#0788B5</strong></div>
+        <div style="--swatch: #f28c00"><span>Sun Orange</span><strong>#F28C00</strong></div>
+        <div style="--swatch: #49a02c"><span>Leaf Green</span><strong>#49A02C</strong></div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <p class="eyebrow">First Campaign Shape</p>
+        <h2>Start with a simple, credible public presence.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          For launch, the site needs to explain who YIMBY Adelaide is, help supporters register,
+          and make it easy for people to contact the group.
+        </p>
+        <p>
+          Payment support can be added later as a dedicated donation or membership flow once the
+          preferred provider is chosen.
+        </p>
+      </div>
+    </section>
+
+    <section class="section signup-band" id="signup">
+      <div>
+        <p class="eyebrow">Sign Up</p>
+        <h2>Join the supporter list.</h2>
+        <p>Register your email now. We will wire this form to the chosen email platform next.</p>
+      </div>
+      <SignupForm />
+    </section>
+
+    <section class="section support-preview">
+      <div class="section__header">
+        <p class="eyebrow">Coming Later</p>
+        <h2>Support and payments.</h2>
+      </div>
+      <div class="support-grid">
+        <article>
+          <h3>Supporter</h3>
+          <p>For people who want updates and campaign actions.</p>
+        </article>
+        <article>
+          <h3>Member</h3>
+          <p>A future paid option for regular supporters.</p>
+        </article>
+        <article>
+          <h3>Donor</h3>
+          <p>A future one-off contribution path for campaign funding.</p>
+        </article>
       </div>
     </section>
   </main>
 </BaseLayout>
-
