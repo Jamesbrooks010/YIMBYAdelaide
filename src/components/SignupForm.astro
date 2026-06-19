@@ -4,34 +4,14 @@ interface Props {
 }
 
 const {compact = false} = Astro.props
-const actionNetworkFormUrl = import.meta.env.PUBLIC_ACTION_NETWORK_FORM_URL
-
-function buildActionNetworkEmbed(formUrl?: string) {
-  if (!formUrl) return null
-
-  try {
-    const url = new URL(formUrl)
-    const [, actionType, slug] = url.pathname.split('/')
-
-    if (url.hostname !== 'actionnetwork.org' || !actionType || !slug) {
-      return null
-    }
-
-    const scriptUrl = new URL(`/widgets/v3/${actionType}/${slug}`, url.origin)
-    scriptUrl.searchParams.set('format', 'js')
-    scriptUrl.searchParams.set('source', 'widget')
-    scriptUrl.searchParams.set('clear_id', 'true')
-
-    return {
-      scriptUrl: scriptUrl.toString(),
-      targetId: `can-${actionType.slice(0, -1)}-area-${slug}`
-    }
-  } catch {
-    return null
-  }
+const actionNetworkEmbed = {
+  scriptUrl:
+    import.meta.env.PUBLIC_ACTION_NETWORK_SCRIPT_URL ||
+    'https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget',
+  targetId:
+    import.meta.env.PUBLIC_ACTION_NETWORK_TARGET_ID ||
+    'can-form-area-sign-up-to-yimby-adelaide'
 }
-
-const actionNetworkEmbed = buildActionNetworkEmbed(actionNetworkFormUrl)
 ---
 
 {

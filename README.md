@@ -32,19 +32,21 @@ PUBLIC_SANITY_PROJECT_ID=your-project-id
 PUBLIC_SANITY_DATASET=production
 SANITY_STUDIO_PROJECT_ID=your-project-id
 SANITY_STUDIO_DATASET=production
-PUBLIC_ACTION_NETWORK_FORM_URL=https://actionnetwork.org/forms/your-form-slug
+PUBLIC_ACTION_NETWORK_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget
+PUBLIC_ACTION_NETWORK_TARGET_ID=can-form-area-sign-up-to-yimby-adelaide
 ```
 
 The site works with fallback content until the Sanity environment variables are set.
 
 ## Action Network Signup
 
-Create a public Action Network Form, then set `PUBLIC_ACTION_NETWORK_FORM_URL` to that form's public URL.
+The signup component renders the Action Network embedded widget for the YIMBY Adelaide signup form.
 
-Example:
+If the Action Network form changes, replace these values with the new embed script URL and target ID from Action Network:
 
 ```text
-PUBLIC_ACTION_NETWORK_FORM_URL=https://actionnetwork.org/forms/join-yimby-adelaide
+PUBLIC_ACTION_NETWORK_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget
+PUBLIC_ACTION_NETWORK_TARGET_ID=can-form-area-sign-up-to-yimby-adelaide
 ```
 
-The signup component will render Action Network's embedded widget when that value is present. Without it, the site uses a local fallback form for development.
+The full embed snippet from Action Network includes a stylesheet, a script, and a target `div`. The site component already includes the stylesheet and target `div`, so only the script URL and target ID need to be configured.
