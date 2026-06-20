@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SignupForm from '@/components/SignupForm.astro'
+---
+
+<BaseLayout
+  title="Membership | YIMBY Adelaide"
+  description="Become a YIMBY Adelaide member and help build a stronger pro-housing voice for Adelaide."
+>
+  <main>
+    <section class="page-hero page-hero--membership">
+      <p class="eyebrow">Membership</p>
+      <h1>Become a founding member of YIMBY Adelaide.</h1>
+      <p>
+        Help build a durable, local, pro-housing organisation that can advocate for more homes,
+        better choices, and a fairer Adelaide.
+      </p>
+      <div class="actions">
+        <a class="button" href="#apply">Apply to join</a>
+        <a class="button button--secondary" href="#principles">How membership works</a>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <p class="eyebrow">Why Join</p>
+        <h2>Membership makes the movement harder to ignore.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          Signing up is the first step. Membership is for people who want to help YIMBY Adelaide
+          become a serious civic voice in planning, transport, housing, and local government debates.
+        </p>
+        <p>
+          Members help fund the practical work: research, submissions, community events, campaign
+          tools, design, hosting, and the boring-but-important administration that makes advocacy last.
+        </p>
+      </div>
+    </section>
+
+    <section class="section member-options" aria-label="Membership options">
+      <article class="member-card member-card--primary">
+        <p class="eyebrow">Recommended</p>
+        <h2>Founding Member</h2>
+        <p class="member-card__price">$10 per month</p>
+        <p>
+          A simple recurring contribution to help YIMBY Adelaide launch, organise, and speak up for
+          housing abundance.
+        </p>
+        <a class="button" href="#apply">Start membership</a>
+      </article>
+
+      <article class="member-card">
+        <p class="eyebrow">Accessible</p>
+        <h2>Supporter Member</h2>
+        <p class="member-card__price">$25 per year</p>
+        <p>
+          A lower-cost option for students, renters, unwaged supporters, or anyone who wants to be
+          involved without a monthly contribution.
+        </p>
+        <a class="button button--secondary" href="#apply">Choose supporter</a>
+      </article>
+    </section>
+
+    <section class="section values" id="principles">
+      <article>
+        <span>01</span>
+        <h3>Member Voice</h3>
+        <p>Members help shape priorities, campaign focus, and the organisation we are building.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Practical Advocacy</h3>
+        <p>Membership funds submissions, research, events, campaign materials, and public education.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Independence</h3>
+        <p>We will be transparent about funding and avoid conflicts that weaken public trust.</p>
+      </article>
+      <article>
+        <span>04</span>
+        <h3>Local Focus</h3>
+        <p>Our work starts with Adelaide: homes near jobs, services, transport, schools, and community.</p>
+      </article>
+    </section>
+
+    <section class="section split probity-section">
+      <div>
+        <p class="eyebrow">Probity</p>
+        <h2>We need trust as much as money.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          YIMBY Adelaide should be funded by people who want a fairer housing system, not by interests
+          seeking special treatment.
+        </p>
+        <p>
+          Before paid memberships go live, we will publish clear rules about donations, conflicts of
+          interest, governance, and what kinds of support we will not accept.
+        </p>
+      </div>
+    </section>
+
+    <section class="section application-band" id="apply">
+      <div>
+        <p class="eyebrow">Apply</p>
+        <h2>Membership payments are coming next.</h2>
+        <p>
+          For now, join the list and tick membership interest when the Action Network form loads.
+          We will connect the payment flow once the membership provider is chosen.
+        </p>
+      </div>
+      <SignupForm compact />
+    </section>
+  </main>
+</BaseLayout>

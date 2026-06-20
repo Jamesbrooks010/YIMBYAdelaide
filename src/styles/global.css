@@ -222,6 +222,24 @@ h3 {
     var(--sky);
 }
 
+.page-hero--membership {
+  color: var(--white);
+  background:
+    linear-gradient(90deg, rgba(8, 38, 26, 0.9), rgba(8, 38, 26, 0.58) 56%, rgba(8, 38, 26, 0.2)),
+    linear-gradient(0deg, rgba(8, 38, 26, 0.65), rgba(8, 38, 26, 0.08)),
+    url("/adelaide-skyline-banner.jfif");
+  background-position: center;
+  background-size: cover;
+}
+
+.page-hero--membership p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.page-hero--membership .eyebrow {
+  color: var(--sun-orange);
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
@@ -369,6 +387,57 @@ textarea:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.member-options {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 1rem;
+}
+
+.member-card {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  min-height: 360px;
+  padding: clamp(1.3rem, 4vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 12px 28px rgba(21, 48, 38, 0.06);
+}
+
+.member-card--primary {
+  border-color: rgba(0, 132, 61, 0.28);
+  background:
+    linear-gradient(135deg, rgba(0, 132, 61, 0.1), transparent 58%),
+    var(--white);
+}
+
+.member-card h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.member-card__price {
+  color: var(--yimby-green);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.probity-section {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.application-band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 0.95fr);
+  gap: clamp(2rem, 7vw, 5rem);
+  align-items: center;
+  width: 100%;
+  padding-inline: max(1rem, calc((100% - 1120px) / 2));
+  background: var(--mist);
+}
+
 .support-grid article,
 .values article {
   min-height: 190px;
@@ -454,6 +523,8 @@ textarea:focus {
   .hero,
   .split,
   .signup-band,
+  .application-band,
+  .member-options,
   .contact-grid {
     grid-template-columns: 1fr;
   }
