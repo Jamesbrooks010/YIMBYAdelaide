@@ -113,6 +113,18 @@ form button:hover {
   color: var(--yimby-green);
 }
 
+.button--disabled {
+  border-color: var(--line);
+  background: #edf3ef;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.button--disabled:hover {
+  border-color: var(--line);
+  background: #edf3ef;
+}
+
 .hero {
   min-height: calc(92vh - 76px);
   display: grid;
@@ -393,6 +405,43 @@ textarea:focus {
   gap: 1rem;
 }
 
+.membership-flow,
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.membership-flow article,
+.donation-card {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  min-height: 240px;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 12px 28px rgba(21, 48, 38, 0.06);
+}
+
+.membership-flow span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--adelaide-blue);
+  color: var(--white);
+  font-weight: 900;
+}
+
+.membership-flow a {
+  color: var(--yimby-green);
+  font-weight: 900;
+}
+
 .member-card {
   display: grid;
   align-content: start;
@@ -421,6 +470,25 @@ textarea:focus {
   font-size: clamp(1.6rem, 4vw, 2.5rem);
   font-weight: 900;
   line-height: 1;
+}
+
+.donation-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.donation-card h3 {
+  color: var(--yimby-green);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+.donation-card .button {
+  align-self: end;
+}
+
+.payment-note {
+  max-width: 720px;
+  margin: 1rem 0 0;
+  color: var(--muted);
 }
 
 .probity-section {
@@ -537,6 +605,8 @@ textarea:focus {
 
   .swatches,
   .values,
+  .membership-flow,
+  .donation-grid,
   .support-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -559,6 +629,8 @@ textarea:focus {
 
   .swatches,
   .values,
+  .membership-flow,
+  .donation-grid,
   .support-grid {
     grid-template-columns: 1fr;
   }

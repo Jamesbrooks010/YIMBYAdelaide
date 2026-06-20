@@ -1,6 +1,35 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
+
+const donationOptions = [
+  {
+    amount: '$25',
+    label: 'Starter',
+    description: 'Helps cover practical launch costs like hosting, basic tools, and campaign materials.',
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_25_URL
+  },
+  {
+    amount: '$50',
+    label: 'Builder',
+    description: 'Helps fund community events, outreach, research, and public education work.',
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_50_URL
+  },
+  {
+    amount: '$100+',
+    label: 'Champion',
+    description: 'Helps YIMBY Adelaide become a stronger, more visible pro-housing voice.',
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_100_URL
+  },
+  {
+    amount: 'Other',
+    label: 'Flexible',
+    description: 'Choose another one-off contribution when the donation page is connected.',
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL
+  }
+]
+
+const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
 ---
 
 <BaseLayout
@@ -16,9 +45,30 @@ import SignupForm from '@/components/SignupForm.astro'
         better choices, and a fairer Adelaide.
       </p>
       <div class="actions">
-        <a class="button" href="#membership">Become a member</a>
+        <a class="button" href="#membership-flow">Become a member</a>
         <a class="button button--secondary" href="#email-updates">Subscribe for updates</a>
       </div>
+    </section>
+
+    <section class="section membership-flow" id="membership-flow" aria-label="Membership flow">
+      <article>
+        <span>1</span>
+        <h3>Subscribe for updates</h3>
+        <p>Use Action Network to receive emails, campaign actions, and membership launch news.</p>
+        <a href="#email-updates">Email signup</a>
+      </article>
+      <article>
+        <span>2</span>
+        <h3>Register membership interest</h3>
+        <p>Tell us you want to be a member so we can follow up when donation payments open.</p>
+        <a href="#membership-interest">Register interest</a>
+      </article>
+      <article>
+        <span>3</span>
+        <h3>Make a member donation</h3>
+        <p>Once payment links are connected, choose a one-off contribution that works for you.</p>
+        <a href="#member-donation">Donation options</a>
+      </article>
     </section>
 
     <section class="section split">
@@ -79,6 +129,41 @@ import SignupForm from '@/components/SignupForm.astro'
       </article>
     </section>
 
+    <section class="section" id="member-donation">
+      <div class="section__header">
+        <p class="eyebrow">Member Donation</p>
+        <h2>Choose a one-off contribution.</h2>
+        <p>
+          These links are ready to connect to Action Network Fundraising, Stripe, or another provider.
+          Until then, membership interest is captured through the signup form below.
+        </p>
+      </div>
+      <div class="donation-grid">
+        {donationOptions.map((option) => (
+          <article class="donation-card">
+            <p class="eyebrow">{option.label}</p>
+            <h3>{option.amount}</h3>
+            <p>{option.description}</p>
+            {
+              option.href ? (
+                <a class="button" href={option.href}>Donate {option.amount}</a>
+              ) : (
+                <a class="button button--disabled" href="#membership-interest" aria-disabled="true">
+                  Coming soon
+                </a>
+              )
+            }
+          </article>
+        ))}
+      </div>
+      {!hasDonationLinks && (
+        <p class="payment-note">
+          Payment links are not connected yet. Add donation URLs in the environment variables when the
+          provider is ready.
+        </p>
+      )}
+    </section>
+
     <section class="section values" id="principles">
       <article>
         <span>01</span>
@@ -125,7 +210,7 @@ import SignupForm from '@/components/SignupForm.astro'
         <h2>Tell us you want to become a member.</h2>
         <p>
           We do not have the membership payment flow live yet. Use the Action Network form to join
-          the list now, and we will follow up when donation-based membership opens.
+          the list now, and we will follow up when donation-based membership payments open.
         </p>
       </div>
       <SignupForm compact />

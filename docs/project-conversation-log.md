@@ -76,6 +76,7 @@ Membership is intentionally separated from ordinary email signup.
 - Membership contributions should be donation-based rather than subscription-based.
 - Suggested donation examples currently shown: `$25 / $50 / $100+`.
 - Payment infrastructure is not live yet.
+- The membership page now has a three-step flow: subscribe for updates, register membership interest, then make a one-off member donation once payment links are connected.
 
 Potential payment options to investigate:
 
