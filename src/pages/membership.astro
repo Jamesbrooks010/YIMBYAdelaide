@@ -16,8 +16,25 @@ import SignupForm from '@/components/SignupForm.astro'
         better choices, and a fairer Adelaide.
       </p>
       <div class="actions">
-        <a class="button" href="#apply">Apply to join</a>
-        <a class="button button--secondary" href="#principles">How membership works</a>
+        <a class="button" href="#membership">Become a member</a>
+        <a class="button button--secondary" href="#email-updates">Subscribe for updates</a>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <p class="eyebrow">Two Ways In</p>
+        <h2>Email updates and membership are separate.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          Subscribing to emails means Action Network can send you updates, campaign actions, and
+          invitations. It is the easiest way to stay connected.
+        </p>
+        <p>
+          Membership is a deeper commitment: joining the organisation, backing its work, and helping
+          build a lasting pro-housing voice for Adelaide.
+        </p>
       </div>
     </section>
 
@@ -32,33 +49,33 @@ import SignupForm from '@/components/SignupForm.astro'
           become a serious civic voice in planning, transport, housing, and local government debates.
         </p>
         <p>
-          Members help fund the practical work: research, submissions, community events, campaign
-          tools, design, hosting, and the boring-but-important administration that makes advocacy last.
+          Member donations help fund the practical work: research, submissions, community events,
+          campaign tools, design, hosting, and the administration that makes advocacy last.
         </p>
       </div>
     </section>
 
-    <section class="section member-options" aria-label="Membership options">
+    <section class="section member-options" id="membership" aria-label="Membership contribution options">
       <article class="member-card member-card--primary">
-        <p class="eyebrow">Recommended</p>
+        <p class="eyebrow">Suggested</p>
         <h2>Founding Member</h2>
-        <p class="member-card__price">$10 per month</p>
+        <p class="member-card__price">Donate what you can</p>
         <p>
-          A simple recurring contribution to help YIMBY Adelaide launch, organise, and speak up for
-          housing abundance.
+          Membership contributions should be donation-based, not a subscription. Give at the level
+          that makes sense for you and help get the organisation off the ground.
         </p>
-        <a class="button" href="#apply">Start membership</a>
+        <a class="button" href="#membership-interest">Register interest</a>
       </article>
 
       <article class="member-card">
-        <p class="eyebrow">Accessible</p>
-        <h2>Supporter Member</h2>
-        <p class="member-card__price">$25 per year</p>
+        <p class="eyebrow">Guide</p>
+        <h2>Contribution Ideas</h2>
+        <p class="member-card__price">$25 / $50 / $100+</p>
         <p>
-          A lower-cost option for students, renters, unwaged supporters, or anyone who wants to be
-          involved without a monthly contribution.
+          These are only suggested one-off amounts. The final payment flow can offer flexible
+          donations once we choose the payment provider.
         </p>
-        <a class="button button--secondary" href="#apply">Choose supporter</a>
+        <a class="button button--secondary" href="#membership-interest">Get notified</a>
       </article>
     </section>
 
@@ -71,7 +88,7 @@ import SignupForm from '@/components/SignupForm.astro'
       <article>
         <span>02</span>
         <h3>Practical Advocacy</h3>
-        <p>Membership funds submissions, research, events, campaign materials, and public education.</p>
+        <p>Member donations fund submissions, research, events, campaign materials, and public education.</p>
       </article>
       <article>
         <span>03</span>
@@ -96,22 +113,39 @@ import SignupForm from '@/components/SignupForm.astro'
           seeking special treatment.
         </p>
         <p>
-          Before paid memberships go live, we will publish clear rules about donations, conflicts of
-          interest, governance, and what kinds of support we will not accept.
+          Before membership donations go live, we will publish clear rules about donations, conflicts
+          of interest, governance, and what kinds of support we will not accept.
         </p>
       </div>
     </section>
 
-    <section class="section application-band" id="apply">
+    <section class="section application-band" id="membership-interest">
       <div>
-        <p class="eyebrow">Apply</p>
-        <h2>Membership payments are coming next.</h2>
+        <p class="eyebrow">Membership Interest</p>
+        <h2>Tell us you want to become a member.</h2>
         <p>
-          For now, join the list and tick membership interest when the Action Network form loads.
-          We will connect the payment flow once the membership provider is chosen.
+          We do not have the membership payment flow live yet. Use the Action Network form to join
+          the list now, and we will follow up when donation-based membership opens.
         </p>
       </div>
       <SignupForm compact />
+    </section>
+
+    <section class="section split" id="email-updates">
+      <div>
+        <p class="eyebrow">Email Updates</p>
+        <h2>Not ready for membership? Stay in the loop.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          The Action Network signup is for emails and campaign actions. It does not make someone a
+          paid member, and it does not collect membership contributions.
+        </p>
+        <p>
+          This separation keeps the first step easy while we design the membership and donation
+          infrastructure properly.
+        </p>
+      </div>
     </section>
   </main>
 </BaseLayout>
