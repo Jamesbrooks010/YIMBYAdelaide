@@ -178,9 +178,9 @@ git push
 
 ## Notes For Future Codex Sessions
 
+- The user is currently working from a laptop and plans to transfer work to a second PC soon. Use GitHub as the source of truth; on the second PC, clone or pull `main` from `https://github.com/Jamesbrooks010/YIMBYAdelaide`.
 - Keep email signup and membership conceptually separate.
 - Do not imply membership payments are live until a payment provider is configured.
 - Keep copy Adelaide-specific and pro-housing, not generic campaign boilerplate.
 - Use the existing palette, logo, and skyline assets.
 - Preserve the Action Network embed unless a new embed code is provided.
-
