@@ -67,6 +67,18 @@ Email signup is handled through Action Network using this embed:
 
 The site component stores the script URL and target ID in `src/components/SignupForm.astro`.
 
+### Membership Interest Form
+
+Membership interest is handled through a separate Action Network embed:
+
+```html
+<link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
+<script src="https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget"></script>
+<div id="can-form-area-become-a-member-of-yimby-adelaide" style="width: 100%"></div>
+```
+
+Do not use the Action Network admin URL in the site. Use only the public widget script URL and target div ID.
+
 ### Membership
 
 Membership is intentionally separated from ordinary email signup.

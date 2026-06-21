@@ -1,16 +1,31 @@
 ---
 interface Props {
   compact?: boolean
+  form?: 'signup' | 'membership'
 }
 
-const {compact = false} = Astro.props
+const {compact = false, form = 'signup'} = Astro.props
+const embeds = {
+  signup: {
+    scriptUrl:
+      import.meta.env.PUBLIC_ACTION_NETWORK_SCRIPT_URL ||
+      'https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget',
+    targetId:
+      import.meta.env.PUBLIC_ACTION_NETWORK_TARGET_ID ||
+      'can-form-area-sign-up-to-yimby-adelaide'
+  },
+  membership: {
+    scriptUrl:
+      import.meta.env.PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL ||
+      'https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget',
+    targetId:
+      import.meta.env.PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID ||
+      'can-form-area-become-a-member-of-yimby-adelaide'
+  }
+}
 const actionNetworkEmbed = {
-  scriptUrl:
-    import.meta.env.PUBLIC_ACTION_NETWORK_SCRIPT_URL ||
-    'https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget',
-  targetId:
-    import.meta.env.PUBLIC_ACTION_NETWORK_TARGET_ID ||
-    'can-form-area-sign-up-to-yimby-adelaide'
+  scriptUrl: embeds[form].scriptUrl,
+  targetId: embeds[form].targetId
 }
 ---
 

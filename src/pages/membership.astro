@@ -60,7 +60,7 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
       <article>
         <span>2</span>
         <h3>Register membership interest</h3>
-        <p>Tell us you want to be a member so we can follow up when donation payments open.</p>
+        <p>Use the membership Action Network form so we can keep member records separate.</p>
         <a href="#membership-interest">Register interest</a>
       </article>
       <article>
@@ -209,11 +209,11 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
         <p class="eyebrow">Membership Interest</p>
         <h2>Tell us you want to become a member.</h2>
         <p>
-          We do not have the membership payment flow live yet. Use the Action Network form to join
-          the list now, and we will follow up when donation-based membership payments open.
+          This Action Network form is separate from the general email signup and is connected to
+          the member pathway. We will follow up when donation-based membership payments open.
         </p>
       </div>
-      <SignupForm compact />
+      <SignupForm compact form="membership" />
     </section>
 
     <section class="section split" id="email-updates">
