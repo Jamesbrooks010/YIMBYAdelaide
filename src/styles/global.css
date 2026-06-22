@@ -228,6 +228,12 @@ h3 {
     var(--mist);
 }
 
+.page-hero--about {
+  background:
+    linear-gradient(90deg, rgba(0, 132, 61, 0.12), rgba(7, 136, 181, 0.08)),
+    var(--mist);
+}
+
 .page-hero--contact {
   background:
     linear-gradient(90deg, rgba(7, 136, 181, 0.12), transparent),
@@ -276,8 +282,15 @@ h3 {
   gap: 1rem;
 }
 
+.about-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .swatches div,
 .values article,
+.about-principles article,
 .support-grid article,
 .contact-aside,
 .contact-form,
@@ -310,6 +323,23 @@ h3 {
 .swatches strong {
   color: var(--muted);
   font-size: 0.86rem;
+}
+
+.about-principles article {
+  min-height: 260px;
+  padding: 1.25rem;
+}
+
+.about-principles h3 {
+  font-size: 1.5rem;
+}
+
+.values--about {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.about-note {
+  border-top: 1px solid var(--line);
 }
 
 .signup-band {
@@ -605,6 +635,7 @@ textarea:focus {
 
   .swatches,
   .values,
+  .about-principles,
   .membership-flow,
   .donation-grid,
   .support-grid {
@@ -629,6 +660,7 @@ textarea:focus {
 
   .swatches,
   .values,
+  .about-principles,
   .membership-flow,
   .donation-grid,
   .support-grid {

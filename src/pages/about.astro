@@ -8,58 +8,136 @@ import SignupForm from '@/components/SignupForm.astro'
   description="About YIMBY Adelaide and the case for more homes, better choices, and a fairer city."
 >
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--about">
       <p class="eyebrow">About</p>
-      <h1>We want Adelaide to welcome more neighbours.</h1>
+      <h1>Adelaide should make room for more neighbours.</h1>
       <p>
-        YIMBY Adelaide is a pro-housing community for people who believe our city should make room
-        for renters, first-home buyers, growing families, students, older people, and everyone who
-        wants a fair chance to live near opportunity.
+        YIMBY Adelaide is a local pro-housing community working for abundant, affordable,
+        climate-friendly homes near the places people live, work, study, and gather.
       </p>
+      <div class="actions">
+        <a class="button" href="/membership">Become a member</a>
+        <a class="button button--secondary" href="#what-we-do">What we do</a>
+      </div>
     </section>
 
     <section class="section split">
       <div>
-        <p class="eyebrow">What We Stand For</p>
-        <h2>More homes where people need them.</h2>
+        <p class="eyebrow">Our Mission</p>
+        <h2>A fairer city starts with enough homes.</h2>
       </div>
       <div class="copy-stack">
         <p>
-          Adelaide can grow without losing what makes it special. That means allowing more housing
-          near transport, jobs, schools, shops, parks, and existing services.
+          Too many people are locked out of the neighbourhoods, jobs, schools, services, and
+          communities that shape their lives. Adelaide can do better.
         </p>
         <p>
           We support practical planning reform, better use of well-located land, and a public
-          conversation that treats housing abundance as civic infrastructure.
+          conversation that treats housing abundance as core civic infrastructure.
+        </p>
+        <p>
+          More homes does not mean every street becomes the same. It means more choices: apartments,
+          townhouses, social housing, student housing, family homes, downsizer homes, and more
+          affordable options close to opportunity.
         </p>
       </div>
     </section>
 
-    <section class="section values">
+    <section class="section about-principles" aria-label="YIMBY Adelaide principles">
+      <article>
+        <p class="eyebrow">01</p>
+        <h3>More homes where people need them</h3>
+        <p>
+          Adelaide should allow more housing near jobs, transport, universities, schools, shops,
+          parks, services, and existing infrastructure.
+        </p>
+      </article>
+      <article>
+        <p class="eyebrow">02</p>
+        <h3>Better choices for more people</h3>
+        <p>
+          Renters, first-home buyers, families, students, older people, and new arrivals all deserve
+          realistic options in the city they call home.
+        </p>
+      </article>
+      <article>
+        <p class="eyebrow">03</p>
+        <h3>Growth that supports climate goals</h3>
+        <p>
+          Well-located homes reduce car dependence, make public transport more useful, and help
+          Adelaide grow without endless sprawl.
+        </p>
+      </article>
+    </section>
+
+    <section class="section split" id="what-we-do">
+      <div>
+        <p class="eyebrow">What We Do</p>
+        <h2>Advocacy, research, and public pressure.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          YIMBY Adelaide exists to make the pro-housing majority visible. We want elected
+          representatives, planners, journalists, and residents to hear from people who support more
+          homes, not only from people opposing change.
+        </p>
+        <p>
+          Our work will include planning submissions, explainers, community events, campaign tools,
+          local stories, and clear asks for councils and state government.
+        </p>
+      </div>
+    </section>
+
+    <section class="section values values--about">
       <article>
         <span>01</span>
-        <h3>Abundance</h3>
-        <p>More homes means more choices, less pressure, and a city that can welcome the next generation.</p>
+        <h3>Speak Up</h3>
+        <p>Help show that Adelaide has residents who welcome more homes and better housing choices.</p>
       </article>
       <article>
         <span>02</span>
-        <h3>Access</h3>
-        <p>People should be able to live near the places, services, and communities that shape their lives.</p>
+        <h3>Make It Practical</h3>
+        <p>Support reforms that turn good intentions into homes people can actually live in.</p>
       </article>
       <article>
         <span>03</span>
-        <h3>Sustainability</h3>
-        <p>Well-located homes reduce car dependence and make better use of existing infrastructure.</p>
+        <h3>Build Trust</h3>
+        <p>Be transparent, evidence-led, non-partisan, and serious about conflicts of interest.</p>
       </article>
+      <article>
+        <span>04</span>
+        <h3>Stay Local</h3>
+        <p>Ground the movement in Adelaide's neighbourhoods, pressures, institutions, and possibilities.</p>
+      </article>
+    </section>
+
+    <section class="section split about-note">
+      <div>
+        <p class="eyebrow">What YIMBY Means</p>
+        <h2>Yes In My Back Yard.</h2>
+      </div>
+      <div class="copy-stack">
+        <p>
+          YIMBY means saying yes to homes, yes to neighbours, yes to opportunity, and yes to a city
+          that can welcome the next generation.
+        </p>
+        <p>
+          It also means being honest about trade-offs. Housing scarcity is not neutral. When we block
+          new homes in well-located places, the costs show up as higher rents, longer commutes, more
+          displacement, and fewer choices.
+        </p>
+      </div>
     </section>
 
     <section class="section signup-band" id="signup">
       <div>
         <p class="eyebrow">Join Us</p>
         <h2>Help build the pro-housing voice Adelaide needs.</h2>
+        <p>
+          Subscribe for updates, campaign actions, and membership news from YIMBY Adelaide.
+        </p>
       </div>
       <SignupForm compact />
     </section>
   </main>
 </BaseLayout>
-
