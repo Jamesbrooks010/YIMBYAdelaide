@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -240,6 +241,10 @@ h3 {
 .planning-map__intro h2,
 .planning-map__intro p {
   margin-bottom: 0;
+}
+
+.planning-map__intro h2 {
+  scroll-margin-top: 7rem;
 }
 
 .planning-map__intro > p {

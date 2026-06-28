@@ -40,14 +40,14 @@ const layer = PLANNING_MAP_LAYERS[layerId]
 
     <div class="planning-map__status" data-map-status role="status" aria-live="polite">
       <span class="planning-map__spinner" aria-hidden="true"></span>
-      <span data-map-status-text>Loading parcel map…</span>
+      <span data-map-status-text>Loading planning map…</span>
       <button class="planning-map__retry" type="button" data-map-retry hidden>Try again</button>
     </div>
 
-    <aside class="planning-map__legend" aria-label="Minimum lot size legend">
+    <aside class="planning-map__legend" aria-label={`${layer.legendTitle} legend`}>
       <div class="planning-map__legend-heading">
-        <strong>Minimum lot size</strong>
-        <span>Subdivision rule</span>
+        <strong>{layer.legendTitle}</strong>
+        <span>{layer.legendSubtitle}</span>
       </div>
       <ul>
         {layer.legend.map((item) => (
@@ -87,6 +87,7 @@ const layer = PLANNING_MAP_LAYERS[layerId]
       ...colourStops,
       fallback.colour
     ] as maplibregl.ExpressionSpecification
+    const fillLayerId = `${layer.id}-fill`
     const frame = container.closest('.planning-map__frame') as HTMLElement
     const status = frame.querySelector('[data-map-status]') as HTMLElement
     const statusText = frame.querySelector('[data-map-status-text]') as HTMLElement
@@ -105,7 +106,7 @@ const layer = PLANNING_MAP_LAYERS[layerId]
       settled = false
       retry.hidden = true
       status.dataset.state = 'loading'
-      statusText.textContent = 'Loading parcel map…'
+      statusText.textContent = 'Loading planning map…'
       map?.remove()
 
       const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`
@@ -134,7 +135,7 @@ const layer = PLANNING_MAP_LAYERS[layerId]
           layers: [
             {id: 'basemap', type: 'raster', source: 'basemap', paint: {'raster-opacity': 0.72, 'raster-saturation': -0.72}},
             {
-              id: 'minimum-lot-fill',
+              id: fillLayerId,
               type: 'fill',
               source: 'parcels',
               'source-layer': layer.sourceLayer,
@@ -173,20 +174,20 @@ const layer = PLANNING_MAP_LAYERS[layerId]
           [event.point.x - 6, event.point.y - 6],
           [event.point.x + 6, event.point.y + 6]
         ]
-        const features = map!.queryRenderedFeatures(hitArea, {layers: ['minimum-lot-fill']})
+        const features = map!.queryRenderedFeatures(hitArea, {layers: [fillLayerId]})
         const feature = features[0]
         if (!feature) return
         const category = Number(feature.properties?.[layer.property] ?? fallback.value)
         new maplibregl.Popup({closeButton: true, closeOnClick: true, offset: 8})
           .setLngLat(event.lngLat)
-          .setHTML(`<strong>Minimum lot size</strong><span>${labels[category] ?? fallback.label}</span>`)
+          .setHTML(`<strong>${layer.popupTitle}</strong><span>${labels[category] ?? fallback.label}</span>`)
           .addTo(map!)
       })
 
-      map.on('mouseenter', 'minimum-lot-fill', () => {
+      map.on('mouseenter', fillLayerId, () => {
         map!.getCanvas().style.cursor = 'pointer'
       })
-      map.on('mouseleave', 'minimum-lot-fill', () => {
+      map.on('mouseleave', fillLayerId, () => {
         map!.getCanvas().style.cursor = ''
       })
     }
