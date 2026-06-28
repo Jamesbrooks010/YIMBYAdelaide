@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import PlanningMap from '@/components/PlanningMap.astro'
 import SignupForm from '@/components/SignupForm.astro'
 ---
 
@@ -41,6 +42,13 @@ import SignupForm from '@/components/SignupForm.astro'
           affordable options close to opportunity.
         </p>
       </div>
+    </section>
+
+    <section class="section section--map">
+      <PlanningMap
+        title="How much land does one new home need?"
+        description="Minimum lot-size rules shape where an existing property can be subdivided. Explore how those rules vary parcel by parcel across metropolitan Adelaide."
+      />
     </section>
 
     <section class="section about-principles" aria-label="YIMBY Adelaide principles">

@@ -1,0 +1,218 @@
+---
+import 'maplibre-gl/dist/maplibre-gl.css'
+import {PLANNING_MAP_LAYERS} from '@/lib/planningMapLayers'
+
+interface Props {
+  id?: string
+  layerId?: keyof typeof PLANNING_MAP_LAYERS
+  title: string
+  description: string
+}
+
+const {
+  id = 'planning-map',
+  layerId = 'minimumLot',
+  title,
+  description
+} = Astro.props
+
+const layer = PLANNING_MAP_LAYERS[layerId]
+---
+
+<section class="planning-map" aria-labelledby={`${id}-title`}>
+  <div class="planning-map__intro">
+    <div>
+      <p class="eyebrow">Explore the rules</p>
+      <h2 id={`${id}-title`}>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </div>
+
+  <div class="planning-map__frame">
+    <div
+      class="planning-map__canvas"
+      id={id}
+      data-planning-map
+      data-layer={layerId}
+      role="region"
+      aria-label={`${title}. Interactive map. Use the controls to zoom and drag to move around Adelaide.`}
+    ></div>
+
+    <div class="planning-map__status" data-map-status role="status" aria-live="polite">
+      <span class="planning-map__spinner" aria-hidden="true"></span>
+      <span data-map-status-text>Loading parcel map…</span>
+      <button class="planning-map__retry" type="button" data-map-retry hidden>Try again</button>
+    </div>
+
+    <aside class="planning-map__legend" aria-label="Minimum lot size legend">
+      <div class="planning-map__legend-heading">
+        <strong>Minimum lot size</strong>
+        <span>Subdivision rule</span>
+      </div>
+      <ul>
+        {layer.legend.map((item) => (
+          <li>
+            <span class="planning-map__swatch" style={`--legend-colour: ${item.colour}`}></span>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+
+  <div class="planning-map__note">
+    <p>Zoom in, then click or tap a parcel to see its category. Boundaries and values are indicative.</p>
+    <p>Source: South Australian parcel and planning data.</p>
+  </div>
+</section>
+
+<script>
+  import maplibregl from 'maplibre-gl'
+  import {Protocol} from 'pmtiles'
+  import {PLANNING_MAP_LAYERS} from '@/lib/planningMapLayers'
+
+  const protocol = new Protocol()
+  maplibregl.addProtocol('pmtiles', protocol.tile)
+
+  function initialiseMap(container: HTMLElement) {
+    const layer = PLANNING_MAP_LAYERS[container.dataset.layer ?? 'minimumLot']
+    const fallback = layer.legend.find((item) => item.value === 0) ?? layer.legend[0]
+    const labels = Object.fromEntries(layer.legend.map((item) => [item.value, item.label]))
+    const colourStops = layer.legend
+      .filter((item) => item.value !== fallback.value)
+      .flatMap((item) => [item.value, item.colour])
+    const colourExpression = [
+      'match',
+      ['get', layer.property],
+      ...colourStops,
+      fallback.colour
+    ] as maplibregl.ExpressionSpecification
+    const frame = container.closest('.planning-map__frame') as HTMLElement
+    const status = frame.querySelector('[data-map-status]') as HTMLElement
+    const statusText = frame.querySelector('[data-map-status-text]') as HTMLElement
+    const retry = frame.querySelector('[data-map-retry]') as HTMLButtonElement
+    let map: maplibregl.Map | undefined
+    let settled = false
+
+    const showError = () => {
+      if (settled) return
+      status.dataset.state = 'error'
+      statusText.textContent = 'The parcel layer could not be loaded.'
+      retry.hidden = false
+    }
+
+    const start = () => {
+      settled = false
+      retry.hidden = true
+      status.dataset.state = 'loading'
+      statusText.textContent = 'Loading parcel map…'
+      map?.remove()
+
+      const archiveUrl = new URL(`${import.meta.env.BASE_URL}${layer.archive}`, window.location.origin).href
+      map = new maplibregl.Map({
+        container,
+        style: {
+          version: 8,
+          sources: {
+            basemap: {
+              type: 'raster',
+              tiles: [
+                'https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
+                'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
+                'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'
+              ],
+              tileSize: 256,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            },
+            overview: {
+              type: 'image',
+              url: new URL(`${import.meta.env.BASE_URL}maps/adelaide-min-lot-overview.png`, window.location.origin).href,
+              coordinates: [
+                [138.39503, -34.62703],
+                [138.98837, -34.62703],
+                [138.98837, -35.21001],
+                [138.39503, -35.21001]
+              ]
+            },
+            parcels: {
+              type: 'vector',
+              url: `pmtiles://${archiveUrl}`,
+              attribution: 'South Australian parcel and planning data'
+            }
+          },
+          layers: [
+            {id: 'basemap', type: 'raster', source: 'basemap', paint: {'raster-opacity': 0.72, 'raster-saturation': -0.72}},
+            {
+              id: 'minimum-lot-overview',
+              type: 'raster',
+              source: 'overview',
+              maxzoom: 12,
+              paint: {
+                'raster-opacity': ['interpolate', ['linear'], ['zoom'], 10.8, 0.9, 12, 0],
+                'raster-resampling': 'linear'
+              }
+            },
+            {
+              id: 'minimum-lot-fill',
+              type: 'fill',
+              source: 'parcels',
+              'source-layer': layer.sourceLayer,
+              minzoom: 11.6,
+              paint: {
+                'fill-color': colourExpression,
+                'fill-opacity': ['interpolate', ['linear'], ['zoom'], 10, 0.76, 15, 0.88],
+                'fill-outline-color': ['interpolate', ['linear'], ['zoom'], 11, 'rgba(255,255,255,0.08)', 15, 'rgba(72,78,75,0.46)']
+              }
+            }
+          ]
+        },
+        bounds: [[138.39503, -35.21001], [138.98837, -34.62703]],
+        fitBoundsOptions: {padding: 24},
+        minZoom: 9,
+        maxZoom: 18,
+        maxPitch: 0,
+        attributionControl: false
+      })
+
+      map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-right')
+      map.addControl(new maplibregl.AttributionControl({compact: true}), 'bottom-right')
+
+      map.once('idle', () => {
+        settled = true
+        status.dataset.state = 'ready'
+      })
+
+      map.on('error', (event) => {
+        console.error('Planning map error', event.error)
+        showError()
+      })
+
+      map.on('click', (event) => {
+        const hitArea: [[number, number], [number, number]] = [
+          [event.point.x - 6, event.point.y - 6],
+          [event.point.x + 6, event.point.y + 6]
+        ]
+        const features = map!.queryRenderedFeatures(hitArea, {layers: ['minimum-lot-fill']})
+        const feature = features[0]
+        if (!feature) return
+        const category = Number(feature.properties?.[layer.property] ?? fallback.value)
+        new maplibregl.Popup({closeButton: true, closeOnClick: true, offset: 8})
+          .setLngLat(event.lngLat)
+          .setHTML(`<strong>Minimum lot size</strong><span>${labels[category] ?? fallback.label}</span>`)
+          .addTo(map!)
+      })
+
+      map.on('mouseenter', 'minimum-lot-fill', () => {
+        map!.getCanvas().style.cursor = 'pointer'
+      })
+      map.on('mouseleave', 'minimum-lot-fill', () => {
+        map!.getCanvas().style.cursor = ''
+      })
+    }
+
+    retry.addEventListener('click', start)
+    start()
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-planning-map]').forEach(initialiseMap)
+</script>

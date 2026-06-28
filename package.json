@@ -15,10 +15,11 @@
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^6.1.0",
     "astro": "^6.4.8",
+    "maplibre-gl": "^5.24.0",
+    "pmtiles": "^4.4.1",
     "sanity": "^6.1.0"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
   }
 }
-
