@@ -61,7 +61,7 @@ const layer = PLANNING_MAP_LAYERS[layerId]
   </div>
 
   <div class="planning-map__note">
-    <p>Zoom in, then click or tap a parcel to see its category. Boundaries and values are indicative.</p>
+    <p>Click or tap a parcel to see its category. Boundaries and values are indicative.</p>
     <p>Source: South Australian parcel and planning data.</p>
   </div>
 </section>
@@ -108,7 +108,8 @@ const layer = PLANNING_MAP_LAYERS[layerId]
       statusText.textContent = 'Loading parcel map…'
       map?.remove()
 
-      const archiveUrl = new URL(`${import.meta.env.BASE_URL}${layer.archive}`, window.location.origin).href
+      const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`
+      const archiveUrl = new URL(`${baseUrl}${layer.archive}`, window.location.origin).href
       map = new maplibregl.Map({
         container,
         style: {
@@ -124,16 +125,6 @@ const layer = PLANNING_MAP_LAYERS[layerId]
               tileSize: 256,
               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             },
-            overview: {
-              type: 'image',
-              url: new URL(`${import.meta.env.BASE_URL}maps/adelaide-min-lot-overview.png`, window.location.origin).href,
-              coordinates: [
-                [138.39503, -34.62703],
-                [138.98837, -34.62703],
-                [138.98837, -35.21001],
-                [138.39503, -35.21001]
-              ]
-            },
             parcels: {
               type: 'vector',
               url: `pmtiles://${archiveUrl}`,
@@ -143,21 +134,11 @@ const layer = PLANNING_MAP_LAYERS[layerId]
           layers: [
             {id: 'basemap', type: 'raster', source: 'basemap', paint: {'raster-opacity': 0.72, 'raster-saturation': -0.72}},
             {
-              id: 'minimum-lot-overview',
-              type: 'raster',
-              source: 'overview',
-              maxzoom: 12,
-              paint: {
-                'raster-opacity': ['interpolate', ['linear'], ['zoom'], 10.8, 0.9, 12, 0],
-                'raster-resampling': 'linear'
-              }
-            },
-            {
               id: 'minimum-lot-fill',
               type: 'fill',
               source: 'parcels',
               'source-layer': layer.sourceLayer,
-              minzoom: 11.6,
+              minzoom: 10.8,
               paint: {
                 'fill-color': colourExpression,
                 'fill-opacity': ['interpolate', ['linear'], ['zoom'], 10, 0.76, 15, 0.88],
@@ -166,9 +147,9 @@ const layer = PLANNING_MAP_LAYERS[layerId]
             }
           ]
         },
-        bounds: [[138.39503, -35.21001], [138.98837, -34.62703]],
-        fitBoundsOptions: {padding: 24},
-        minZoom: 9,
+        center: [138.6007, -34.9285],
+        zoom: 12.5,
+        minZoom: 10.8,
         maxZoom: 18,
         maxPitch: 0,
         attributionControl: false

@@ -80,8 +80,7 @@ When these are empty, the membership page shows the contribution options as "Com
 ## Planning map tiles
 
 The About page reads the minimum-lot parcel layer from `public/maps/adelaide-min-lot.pmtiles`.
-At the metropolitan overview it uses a small transparent raster for a fast first render, then fades
-to the detailed vectors as the reader zooms in.
+It opens directly on parcel-level detail and uses HTTP range requests to load only the visible tiles.
 The PMTiles archive contains only parcel geometry and an eight-value display category; it does not
 publish the source GeoPackage or its other parcel fields.
 

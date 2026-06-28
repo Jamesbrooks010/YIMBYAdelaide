@@ -7,11 +7,13 @@ interface Props {
 }
 
 const {title, description = 'YIMBY Adelaide supports abundant, affordable, climate-friendly housing.'} = Astro.props
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`
+const withBase = (path: string) => path === '/' ? base : `${base}${path.replace(/^\//, '')}`
 const navigation = [
-  {label: 'Home', href: '/'},
-  {label: 'About', href: '/about'},
-  {label: 'Membership', href: '/membership'},
-  {label: 'Contact', href: '/contact'}
+  {label: 'Home', href: withBase('/')},
+  {label: 'About', href: withBase('/about')},
+  {label: 'Membership', href: withBase('/membership')},
+  {label: 'Contact', href: withBase('/contact')}
 ]
 ---
 
@@ -23,20 +25,20 @@ const navigation = [
     <meta name="description" content={description} />
     <title>{title}</title>
   </head>
-  <body>
+  <body style={`--skyline-image: url("${withBase('/adelaide-skyline-banner.jfif')}")`}>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="YIMBY Adelaide home">
-        <img src="/yimby-adelaide-logo.png" alt="" />
+      <a class="brand" href={withBase('/')} aria-label="YIMBY Adelaide home">
+        <img src={withBase('/yimby-adelaide-logo.png')} alt="" />
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
-      <a class="header-cta" href="/membership">Join</a>
+      <a class="header-cta" href={withBase('/membership')}>Join</a>
     </header>
     <slot />
     <footer class="site-footer">
       <div>
-        <img src="/yimby-adelaide-logo.png" alt="YIMBY Adelaide" />
+        <img src={withBase('/yimby-adelaide-logo.png')} alt="YIMBY Adelaide" />
         <p>More homes, better choices, a fairer Adelaide.</p>
       </div>
       <nav aria-label="Footer navigation">

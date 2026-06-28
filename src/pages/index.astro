@@ -1,13 +1,15 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`
 ---
 
 <BaseLayout title="YIMBY Adelaide">
   <main>
     <section class="hero">
       <div class="hero__content">
-        <img class="hero__logo" src="/yimby-adelaide-logo.png" alt="YIMBY Adelaide" />
+        <img class="hero__logo" src={`${base}yimby-adelaide-logo.png`} alt="YIMBY Adelaide" />
         <p class="eyebrow">YIMBY Adelaide</p>
         <h1>More homes. Better choices. A fairer Adelaide.</h1>
         <p>
@@ -16,7 +18,7 @@ import SignupForm from '@/components/SignupForm.astro'
         </p>
         <div class="actions">
           <a class="button" href="#signup">Join the list</a>
-          <a class="button button--secondary" href="/about">About us</a>
+          <a class="button button--secondary" href={`${base}about`}>About us</a>
         </div>
       </div>
     </section>
