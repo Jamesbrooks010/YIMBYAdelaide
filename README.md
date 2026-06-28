@@ -76,3 +76,20 @@ PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL=
 ```
 
 When these are empty, the membership page shows the contribution options as "Coming soon" and routes people to membership interest signup.
+
+## Planning map tiles
+
+The About page reads the minimum-lot parcel layer from `public/maps/adelaide-min-lot.pmtiles`.
+It opens directly on parcel-level detail and uses HTTP range requests to load only the visible tiles.
+The PMTiles archive contains only parcel geometry and an eight-value display category; it does not
+publish the source GeoPackage or its other parcel fields.
+
+To rebuild the archive on Windows with QGIS installed:
+
+```powershell
+.\scripts\build-parcel-tiles.ps1 -Source 'C:\path\to\sa-parcels.gpkg'
+```
+
+The map uses MapLibre GL JS because it can render the single-file PMTiles vector archive directly.
+This avoids shipping one large GeoJSON or thousands of individual tile files, and leaves room for
+additional planning layers to use the same pattern later.

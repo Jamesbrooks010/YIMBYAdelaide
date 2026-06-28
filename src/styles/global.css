@@ -133,7 +133,7 @@ form button:hover {
   background:
     linear-gradient(90deg, rgba(8, 38, 26, 0.88), rgba(8, 38, 26, 0.56) 48%, rgba(8, 38, 26, 0.16)),
     linear-gradient(0deg, rgba(8, 38, 26, 0.68), rgba(8, 38, 26, 0.02) 42%),
-    url("/adelaide-skyline-banner.jfif");
+    var(--skyline-image);
   background-position: center;
   background-size: cover;
   color: var(--white);
@@ -221,6 +221,193 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
+.section--map {
+  width: min(1320px, calc(100% - 2rem));
+}
+
+.planning-map {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.planning-map__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.65fr);
+  gap: clamp(1.25rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.planning-map__intro h2,
+.planning-map__intro p {
+  margin-bottom: 0;
+}
+
+.planning-map__intro > p {
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.planning-map__frame {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #edf0ec;
+  box-shadow: var(--shadow);
+}
+
+.planning-map__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.planning-map__status {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(251, 251, 247, 0.88);
+  color: var(--ink);
+  font-weight: 800;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.planning-map__status[data-state='ready'] {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.planning-map__status[data-state='error'] {
+  flex-direction: column;
+  text-align: center;
+}
+
+.planning-map__status[data-state='error'] .planning-map__spinner {
+  display: none;
+}
+
+.planning-map__spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 132, 61, 0.2);
+  border-top-color: var(--yimby-green);
+  border-radius: 50%;
+  animation: map-spin 800ms linear infinite;
+}
+
+.planning-map__retry {
+  min-height: 42px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--yimby-green);
+  border-radius: 6px;
+  background: var(--yimby-green);
+  color: var(--white);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+@keyframes map-spin {
+  to { transform: rotate(360deg); }
+}
+
+.planning-map__legend {
+  position: absolute;
+  z-index: 3;
+  top: 1rem;
+  left: 1rem;
+  width: min(220px, calc(100% - 5.5rem));
+  padding: 1rem;
+  border: 1px solid rgba(21, 48, 38, 0.13);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 30px rgba(21, 48, 38, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.planning-map__legend-heading {
+  display: grid;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.planning-map__legend-heading strong {
+  font-size: 1rem;
+}
+
+.planning-map__legend-heading span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.planning-map__legend ul {
+  display: grid;
+  gap: 0.42rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.planning-map__legend li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+
+.planning-map__swatch {
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(21, 48, 38, 0.16);
+  border-radius: 2px;
+  background: var(--legend-colour);
+}
+
+.planning-map__note {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.planning-map__note p {
+  margin: 0;
+}
+
+.planning-map .maplibregl-ctrl-group {
+  overflow: hidden;
+  border: 1px solid rgba(21, 48, 38, 0.14);
+  border-radius: 6px;
+  box-shadow: 0 7px 20px rgba(21, 48, 38, 0.1);
+}
+
+.planning-map .maplibregl-ctrl-attrib {
+  color: #405249;
+  font-family: inherit;
+}
+
+.planning-map .maplibregl-popup-content {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem 2rem 0.9rem 0.9rem;
+  border-radius: 6px;
+  color: var(--ink);
+  font-family: inherit;
+  box-shadow: 0 12px 30px rgba(21, 48, 38, 0.16);
+}
+
+.planning-map .maplibregl-popup-content span {
+  color: var(--muted);
+}
+
 .page-hero {
   padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 7vw, 6rem);
   background:
@@ -245,7 +432,7 @@ h3 {
   background:
     linear-gradient(90deg, rgba(8, 38, 26, 0.9), rgba(8, 38, 26, 0.58) 56%, rgba(8, 38, 26, 0.2)),
     linear-gradient(0deg, rgba(8, 38, 26, 0.65), rgba(8, 38, 26, 0.08)),
-    url("/adelaide-skyline-banner.jfif");
+    var(--skyline-image);
   background-position: center;
   background-size: cover;
 }
@@ -620,6 +807,7 @@ textarea:focus {
 
   .hero,
   .split,
+  .planning-map__intro,
   .signup-band,
   .application-band,
   .member-options,
@@ -631,6 +819,10 @@ textarea:focus {
     min-height: calc(86vh - 76px);
     padding: 2rem 1rem;
     background-position: 58% center;
+  }
+
+  .planning-map__frame {
+    height: 560px;
   }
 
   .swatches,
@@ -656,6 +848,46 @@ textarea:focus {
 
   .button {
     width: 100%;
+  }
+
+  .section--map {
+    width: 100%;
+  }
+
+  .planning-map__intro,
+  .planning-map__note {
+    width: calc(100% - 2rem);
+    margin-inline: auto;
+  }
+
+  .planning-map__frame {
+    height: min(72vh, 590px);
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .planning-map__legend {
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 180px;
+    padding: 0.75rem;
+  }
+
+  .planning-map__legend li {
+    grid-template-columns: 15px 1fr;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+  }
+
+  .planning-map__swatch {
+    width: 15px;
+    height: 15px;
+  }
+
+  .planning-map__note {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
   .swatches,
