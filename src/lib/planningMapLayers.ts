@@ -9,6 +9,7 @@ export interface PlanningMapLayer {
   archive: string
   sourceLayer: string
   property: string
+  switchLabel: string
   legendTitle: string
   legendSubtitle: string
   popupTitle: string
@@ -21,6 +22,7 @@ export const PLANNING_MAP_LAYERS: Record<string, PlanningMapLayer> = {
     archive: 'maps/adelaide-min-lot.pmtiles',
     sourceLayer: 'parcels',
     property: 'lot_class',
+    switchLabel: 'Subdivision',
     legendTitle: 'Minimum lot size',
     legendSubtitle: 'Subdivision rule',
     popupTitle: 'Minimum lot size',
@@ -40,6 +42,7 @@ export const PLANNING_MAP_LAYERS: Record<string, PlanningMapLayer> = {
     archive: 'maps/adelaide-max-height.pmtiles',
     sourceLayer: 'parcels',
     property: 'height_class',
+    switchLabel: 'Building height',
     legendTitle: 'Maximum building height',
     legendSubtitle: 'Planning rule',
     popupTitle: 'Maximum building height',
