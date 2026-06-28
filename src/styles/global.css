@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -242,9 +243,46 @@ h3 {
   margin-bottom: 0;
 }
 
+.planning-map__intro h2 {
+  scroll-margin-top: 7rem;
+}
+
 .planning-map__intro > p {
   color: var(--muted);
   font-size: 1.08rem;
+}
+
+.planning-map__switcher {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-self: start;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #edf0ec;
+}
+
+.planning-map__switcher button {
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.planning-map__switcher button[aria-pressed='true'] {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 3px 12px rgba(21, 48, 38, 0.12);
+}
+
+.planning-map__switcher button:focus-visible {
+  outline: 3px solid rgba(0, 132, 61, 0.28);
+  outline-offset: 2px;
 }
 
 .planning-map__frame {
@@ -855,9 +893,14 @@ textarea:focus {
   }
 
   .planning-map__intro,
+  .planning-map__switcher,
   .planning-map__note {
     width: calc(100% - 2rem);
     margin-inline: auto;
+  }
+
+  .planning-map__switcher {
+    justify-self: stretch;
   }
 
   .planning-map__frame {

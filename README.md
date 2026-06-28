@@ -81,6 +81,7 @@ When these are empty, the membership page shows the contribution options as "Com
 
 The About page reads the minimum-lot parcel layer from `public/maps/adelaide-min-lot.pmtiles`.
 It opens directly on parcel-level detail and uses HTTP range requests to load only the visible tiles.
+The maximum-height map uses the same approach with `public/maps/adelaide-max-height.pmtiles`.
 The PMTiles archive contains only parcel geometry and an eight-value display category; it does not
 publish the source GeoPackage or its other parcel fields.
 
@@ -88,6 +89,7 @@ To rebuild the archive on Windows with QGIS installed:
 
 ```powershell
 .\scripts\build-parcel-tiles.ps1 -Source 'C:\path\to\sa-parcels.gpkg'
+.\scripts\build-height-tiles.ps1 -Source 'C:\path\to\maximum-building-height.gpkg'
 ```
 
 The map uses MapLibre GL JS because it can render the single-file PMTiles vector archive directly.
