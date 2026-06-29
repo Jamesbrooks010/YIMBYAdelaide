@@ -1,36 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
-
-const donationPageUrl = import.meta.env.PUBLIC_DONATION_URL
-const donationOptions = [
-  {
-    amount: '$25',
-    label: 'Starter',
-    description: 'Helps cover practical launch costs like hosting, basic tools, and campaign materials.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_25_URL || donationPageUrl
-  },
-  {
-    amount: '$50',
-    label: 'Builder',
-    description: 'Helps fund community events, outreach, research, and public education work.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_50_URL || donationPageUrl
-  },
-  {
-    amount: '$100+',
-    label: 'Champion',
-    description: 'Helps YIMBY Adelaide become a stronger, more visible pro-housing voice.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_100_URL || donationPageUrl
-  },
-  {
-    amount: 'Other',
-    label: 'Flexible',
-    description: 'Choose another one-off contribution when the donation page is connected.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL || donationPageUrl
-  }
-]
-
-const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
 ---
 
 <BaseLayout
@@ -60,15 +30,9 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
       </article>
       <article>
         <span>2</span>
-        <h3>Register membership interest</h3>
-        <p>Use the membership Action Network form so we can keep member records separate.</p>
-        <a href="#membership-interest">Register interest</a>
-      </article>
-      <article>
-        <span>3</span>
-        <h3>Make a member donation</h3>
-        <p>Once payment links are connected, choose a one-off contribution that works for you.</p>
-        <a href="#member-donation">Donation options</a>
+        <h3>Become a member</h3>
+        <p>Use the separate membership form so we can keep member records distinct from email subscribers.</p>
+        <a href="#become-a-member">Become a member</a>
       </article>
     </section>
 
@@ -104,65 +68,6 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
           campaign tools, design, hosting, and the administration that makes advocacy last.
         </p>
       </div>
-    </section>
-
-    <section class="section member-options" id="membership" aria-label="Membership contribution options">
-      <article class="member-card member-card--primary">
-        <p class="eyebrow">Suggested</p>
-        <h2>Membership</h2>
-        <p class="member-card__price">Donate what you can</p>
-        <p>
-          Membership contributions should be donation-based, not a subscription. Give at the level
-          that makes sense for you and help get the organisation off the ground.
-        </p>
-        <a class="button" href="#membership-interest">Register interest</a>
-      </article>
-
-      <article class="member-card">
-        <p class="eyebrow">Guide</p>
-        <h2>Contribution Ideas</h2>
-        <p class="member-card__price">$25 / $50 / $100+</p>
-        <p>
-          These are only suggested one-off amounts. The final payment flow can offer flexible
-          donations once we choose the payment provider.
-        </p>
-        <a class="button button--secondary" href="#membership-interest">Get notified</a>
-      </article>
-    </section>
-
-    <section class="section" id="member-donation">
-      <div class="section__header">
-        <p class="eyebrow">Member Donation</p>
-        <h2>Choose a one-off contribution.</h2>
-        <p>
-          Choose an amount and continue to YIMBY Adelaide’s secure payment page. Until that page is
-          connected, you can register your membership interest through the form below.
-        </p>
-      </div>
-      <div class="donation-grid">
-        {donationOptions.map((option) => (
-          <article class="donation-card">
-            <p class="eyebrow">{option.label}</p>
-            <h3>{option.amount}</h3>
-            <p>{option.description}</p>
-            {
-              option.href ? (
-                <a class="button" href={option.href} target="_blank" rel="noreferrer">Donate {option.amount}</a>
-              ) : (
-                <a class="button button--disabled" href="#membership-interest" aria-disabled="true">
-                  Coming soon
-                </a>
-              )
-            }
-          </article>
-        ))}
-      </div>
-      {!hasDonationLinks && (
-        <p class="payment-note">
-          Payment links are not connected yet. Add donation URLs in the environment variables when the
-          secure payment page is ready.
-        </p>
-      )}
     </section>
 
     <section class="section values" id="principles">
@@ -205,10 +110,10 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
       </div>
     </section>
 
-    <section class="section application-band" id="membership-interest">
+    <section class="section application-band" id="become-a-member">
       <div>
-        <p class="eyebrow">Membership Interest</p>
-        <h2>Tell us you want to become a member.</h2>
+        <p class="eyebrow">Become a Member</p>
+        <h2>Become a member of YIMBY Adelaide.</h2>
         <p>
           This Action Network form is separate from the general email signup and is connected to
           the member pathway. We will follow up when donation-based membership payments open.
@@ -217,21 +122,16 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
       <SignupForm compact form="membership" />
     </section>
 
-    <section class="section split" id="email-updates">
+    <section class="section application-band application-band--email" id="email-updates">
       <div>
         <p class="eyebrow">Email Updates</p>
-        <h2>Not ready for membership? Stay in the loop.</h2>
-      </div>
-      <div class="copy-stack">
+        <h2>Subscribe for updates.</h2>
         <p>
           The Action Network signup is for emails and campaign actions. It does not make someone a
           paid member, and it does not collect membership contributions.
         </p>
-        <p>
-          This separation keeps the first step easy while we design the membership and donation
-          infrastructure properly.
-        </p>
       </div>
+      <SignupForm compact />
     </section>
   </main>
 </BaseLayout>

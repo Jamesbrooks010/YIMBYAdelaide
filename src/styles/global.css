@@ -126,6 +126,17 @@ form button:hover {
   background: #edf3ef;
 }
 
+.hero .button:not(.button--secondary) {
+  border-color: var(--sun-orange);
+  background: var(--sun-orange);
+  color: var(--ink);
+}
+
+.hero .button:not(.button--secondary):hover {
+  border-color: #d97900;
+  background: #d97900;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -694,8 +705,8 @@ h3 {
   color: var(--sun-orange);
 }
 
-.signup-band p {
-  color: rgba(255, 255, 255, 0.78);
+.signup-band > div > p:not(.eyebrow) {
+  color: var(--sky);
 }
 
 .signup-form,
@@ -763,7 +774,7 @@ textarea:focus {
 }
 
 .support-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .member-options {
@@ -775,7 +786,7 @@ textarea:focus {
 .membership-flow,
 .donation-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -873,6 +884,10 @@ textarea:focus {
   background: var(--mist);
 }
 
+.application-band--email {
+  background: var(--sky);
+}
+
 .support-grid article,
 .values article {
   min-height: 190px;
@@ -967,9 +982,9 @@ textarea:focus {
   }
 
   .hero {
-    min-height: calc(86vh - 76px);
-    padding: 2rem 1rem;
-    background-position: 58% center;
+    min-height: auto;
+    align-items: start;
+    padding: clamp(3rem, 12vw, 5rem) 1rem;
   }
 
   .planning-map__frame {
