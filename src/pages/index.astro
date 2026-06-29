@@ -5,83 +5,125 @@ import SignupForm from '@/components/SignupForm.astro'
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`
 ---
 
-<BaseLayout title="YIMBY Adelaide">
+<BaseLayout
+  title="YIMBY Adelaide"
+  description="YIMBY Adelaide is the local voice for more homes, better choices, and a fairer city."
+>
   <main>
     <section class="hero">
       <div class="hero__content">
-        <img class="hero__logo" src={`${base}yimby-adelaide-logo.png`} alt="YIMBY Adelaide" />
         <p class="eyebrow">YIMBY Adelaide</p>
         <h1>More homes. Better choices. A fairer Adelaide.</h1>
         <p>
-          A local pro-housing voice for abundant, affordable, climate-friendly homes close to the
-          places people already live, work, study, and gather.
+          We are building a strong local voice for abundant, affordable, well-located homes close
+          to jobs, schools, services, transport, and community.
         </p>
         <div class="actions">
-          <a class="button" href="#signup">Join the list</a>
-          <a class="button button--secondary" href={`${base}about`}>About us</a>
+          <a class="button" href="#signup">Join the movement</a>
+          <a class="button button--secondary" href={`${base}about#planning-map-title`}>Explore the map</a>
         </div>
       </div>
     </section>
 
-    <section class="section palette-section">
-      <div class="section__header">
-        <p class="eyebrow">Brand Palette</p>
-        <h2>Bright, civic, and local.</h2>
-        <p>The first visual system uses the logo colours as the source of truth.</p>
-      </div>
-      <div class="swatches" aria-label="YIMBY Adelaide colour palette">
-        <div style="--swatch: #00843d"><span>YIMBY Green</span><strong>#00843D</strong></div>
-        <div style="--swatch: #0788b5"><span>Adelaide Blue</span><strong>#0788B5</strong></div>
-        <div style="--swatch: #f28c00"><span>Sun Orange</span><strong>#F28C00</strong></div>
-        <div style="--swatch: #49a02c"><span>Leaf Green</span><strong>#49A02C</strong></div>
-      </div>
-    </section>
-
-    <section class="section split">
+    <section class="section split home-intro">
       <div>
-        <p class="eyebrow">First Campaign Shape</p>
-        <h2>Start with a simple, credible public presence.</h2>
+        <p class="eyebrow">Why We Exist</p>
+        <h2>Adelaide needs a positive voice for more homes.</h2>
       </div>
       <div class="copy-stack">
         <p>
-          For launch, the site needs to explain who YIMBY Adelaide is, help supporters register,
-          and make it easy for people to contact the group.
+          Adelaide is no longer the affordable city many of us remember. Rents and house prices
+          are locking people out of the neighbourhoods and opportunities that shape their lives.
         </p>
         <p>
-          Payment support can be added later as a dedicated donation or membership flow once the
-          preferred provider is chosen.
+          YIMBY Adelaide makes the case for practical planning reform and more housing choices in
+          the well-located places where people already want to live.
         </p>
+        <a class="text-link" href={`${base}about`}>Why we started YIMBY Adelaide →</a>
+      </div>
+    </section>
+
+    <section class="section home-priorities" aria-labelledby="home-priorities-title">
+      <div class="section__header">
+        <p class="eyebrow">What We Do</p>
+        <h2 id="home-priorities-title">Turn support for housing into a visible civic voice.</h2>
+      </div>
+      <div class="home-feature-grid">
+        <article>
+          <span>01</span>
+          <h3>Make the case</h3>
+          <p>Explain why more housing supply and better planning matter for affordability and opportunity.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Show the rules</h3>
+          <p>Turn complex planning controls into clear maps, explainers, and practical reform ideas.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Mobilise supporters</h3>
+          <p>Help residents speak up through submissions, campaigns, events, and public debate.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-map-feature">
+      <div>
+        <p class="eyebrow">Explore the Rules</p>
+        <h2>See what Adelaide allows, parcel by parcel.</h2>
+        <p>
+          Compare minimum subdivision sizes and maximum building heights across metropolitan
+          Adelaide with our interactive planning map.
+        </p>
+        <a class="button" href={`${base}about#planning-map-title`}>Open the planning map</a>
+      </div>
+      <div class="home-map-feature__layers" aria-label="Available planning map layers">
+        <article>
+          <span class="home-map-feature__swatch home-map-feature__swatch--lots" aria-hidden="true"></span>
+          <div><strong>Subdivision</strong><span>Minimum lot-size controls</span></div>
+        </article>
+        <article>
+          <span class="home-map-feature__swatch home-map-feature__swatch--height" aria-hidden="true"></span>
+          <div><strong>Building height</strong><span>Maximum designated storeys</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section support-preview" id="get-involved">
+      <div class="section__header">
+        <p class="eyebrow">Get Involved</p>
+        <h2>Choose the pathway that suits you.</h2>
+        <p>Stay informed, become a member, or help fund a durable pro-housing organisation.</p>
+      </div>
+      <div class="support-grid">
+        <article>
+          <p class="eyebrow">Stay Connected</p>
+          <h3>Subscribe</h3>
+          <p>Receive campaign updates, event invitations, and practical ways to take action.</p>
+          <a class="text-link" href="#signup">Join the email list →</a>
+        </article>
+        <article>
+          <p class="eyebrow">Go Deeper</p>
+          <h3>Become a member</h3>
+          <p>Register your interest in helping shape and sustain YIMBY Adelaide’s work.</p>
+          <a class="text-link" href={`${base}membership#membership-interest`}>Membership pathway →</a>
+        </article>
+        <article>
+          <p class="eyebrow">Back the Work</p>
+          <h3>Donate</h3>
+          <p>Support research, submissions, events, campaign tools, and public education.</p>
+          <a class="text-link" href={`${base}membership#member-donation`}>Donation pathway →</a>
+        </article>
       </div>
     </section>
 
     <section class="section signup-band" id="signup">
       <div>
-        <p class="eyebrow">Sign Up</p>
-        <h2>Join the supporter list.</h2>
-        <p>Register your email for YIMBY Adelaide updates, campaign actions, and launch news.</p>
+        <p class="eyebrow">Stay Connected</p>
+        <h2>Join Adelaide’s pro-housing community.</h2>
+        <p>Get campaign updates, event invitations, and practical opportunities to speak up.</p>
       </div>
       <SignupForm />
-    </section>
-
-    <section class="section support-preview">
-      <div class="section__header">
-        <p class="eyebrow">Coming Later</p>
-        <h2>Support and payments.</h2>
-      </div>
-      <div class="support-grid">
-        <article>
-          <h3>Supporter</h3>
-          <p>For people who want updates and campaign actions.</p>
-        </article>
-        <article>
-          <h3>Member</h3>
-          <p>A future paid option for regular supporters.</p>
-        </article>
-        <article>
-          <h3>Donor</h3>
-          <p>A future one-off contribution path for campaign funding.</p>
-        </article>
-      </div>
     </section>
   </main>
 </BaseLayout>

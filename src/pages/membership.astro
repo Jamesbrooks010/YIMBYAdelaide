@@ -2,30 +2,31 @@
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
 
+const donationPageUrl = import.meta.env.PUBLIC_DONATION_URL
 const donationOptions = [
   {
     amount: '$25',
     label: 'Starter',
     description: 'Helps cover practical launch costs like hosting, basic tools, and campaign materials.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_25_URL
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_25_URL || donationPageUrl
   },
   {
     amount: '$50',
     label: 'Builder',
     description: 'Helps fund community events, outreach, research, and public education work.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_50_URL
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_50_URL || donationPageUrl
   },
   {
     amount: '$100+',
     label: 'Champion',
     description: 'Helps YIMBY Adelaide become a stronger, more visible pro-housing voice.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_100_URL
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_100_URL || donationPageUrl
   },
   {
     amount: 'Other',
     label: 'Flexible',
     description: 'Choose another one-off contribution when the donation page is connected.',
-    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL
+    href: import.meta.env.PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL || donationPageUrl
   }
 ]
 
@@ -134,8 +135,8 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
         <p class="eyebrow">Member Donation</p>
         <h2>Choose a one-off contribution.</h2>
         <p>
-          These links are ready to connect to Action Network Fundraising, Stripe, or another provider.
-          Until then, membership interest is captured through the signup form below.
+          Choose an amount and continue to YIMBY Adelaide’s secure payment page. Until that page is
+          connected, you can register your membership interest through the form below.
         </p>
       </div>
       <div class="donation-grid">
@@ -146,7 +147,7 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
             <p>{option.description}</p>
             {
               option.href ? (
-                <a class="button" href={option.href}>Donate {option.amount}</a>
+                <a class="button" href={option.href} target="_blank" rel="noreferrer">Donate {option.amount}</a>
               ) : (
                 <a class="button button--disabled" href="#membership-interest" aria-disabled="true">
                   Coming soon
@@ -159,7 +160,7 @@ const hasDonationLinks = donationOptions.some((option) => Boolean(option.href))
       {!hasDonationLinks && (
         <p class="payment-note">
           Payment links are not connected yet. Add donation URLs in the environment variables when the
-          provider is ready.
+          secure payment page is ready.
         </p>
       )}
     </section>
