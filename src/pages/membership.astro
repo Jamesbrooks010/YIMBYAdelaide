@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import MembershipJourney from '@/components/MembershipJourney.astro'
 import SignupForm from '@/components/SignupForm.astro'
 ---
 
@@ -93,34 +94,7 @@ import SignupForm from '@/components/SignupForm.astro'
       </article>
     </section>
 
-    <section class="section split probity-section">
-      <div>
-        <p class="eyebrow">Probity</p>
-        <h2>We need trust as much as money.</h2>
-      </div>
-      <div class="copy-stack">
-        <p>
-          YIMBY Adelaide should be funded by people who want a fairer housing system, not by interests
-          seeking special treatment.
-        </p>
-        <p>
-          Before membership donations go live, we will publish clear rules about donations, conflicts
-          of interest, governance, and what kinds of support we will not accept.
-        </p>
-      </div>
-    </section>
-
-    <section class="section application-band" id="become-a-member">
-      <div>
-        <p class="eyebrow">Become a Member</p>
-        <h2>Become a member of YIMBY Adelaide.</h2>
-        <p>
-          This Action Network form is separate from the general email signup and is connected to
-          the member pathway. We will follow up when donation-based membership payments open.
-        </p>
-      </div>
-      <SignupForm compact form="membership" />
-    </section>
+    <MembershipJourney />
 
     <section class="section application-band application-band--email" id="email-updates">
       <div>
