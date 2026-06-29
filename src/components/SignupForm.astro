@@ -12,7 +12,8 @@ const embeds = {
       'https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget',
     targetId:
       import.meta.env.PUBLIC_ACTION_NETWORK_TARGET_ID ||
-      'can-form-area-sign-up-to-yimby-adelaide'
+      'can-form-area-sign-up-to-yimby-adelaide',
+    pageUrl: 'https://actionnetwork.org/forms/sign-up-to-yimby-adelaide'
   },
   membership: {
     scriptUrl:
@@ -20,7 +21,8 @@ const embeds = {
       'https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget',
     targetId:
       import.meta.env.PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID ||
-      'can-form-area-become-a-member-of-yimby-adelaide'
+      'can-form-area-become-a-member-of-yimby-adelaide',
+    pageUrl: 'https://actionnetwork.org/forms/become-a-member-of-yimby-adelaide'
   }
 }
 const actionNetworkEmbed = {
@@ -37,6 +39,9 @@ const actionNetworkEmbed = {
       <div id={actionNetworkEmbed.targetId} style="width: 100%">
         <!-- Action Network inserts the embedded form here. -->
       </div>
+      <p class="signup-form__fallback">
+        Form not loading? <a href={actionNetworkEmbed.pageUrl} target="_blank" rel="noreferrer">Open it directly on Action Network</a>.
+      </p>
     </div>
   ) : (
     <form

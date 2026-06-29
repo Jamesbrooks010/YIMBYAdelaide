@@ -36,6 +36,7 @@ PUBLIC_ACTION_NETWORK_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/sign-
 PUBLIC_ACTION_NETWORK_TARGET_ID=can-form-area-sign-up-to-yimby-adelaide
 PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget
 PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-become-a-member-of-yimby-adelaide
+PUBLIC_DONATION_URL=
 PUBLIC_MEMBERSHIP_DONATION_25_URL=
 PUBLIC_MEMBERSHIP_DONATION_50_URL=
 PUBLIC_MEMBERSHIP_DONATION_100_URL=
@@ -69,11 +70,16 @@ PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-become-a-member-of-yimb
 Membership contributions are donation-based. Once payment pages exist, set these values to the relevant Action Network Fundraising, Stripe, or other payment links:
 
 ```text
+PUBLIC_DONATION_URL=
 PUBLIC_MEMBERSHIP_DONATION_25_URL=
 PUBLIC_MEMBERSHIP_DONATION_50_URL=
 PUBLIC_MEMBERSHIP_DONATION_100_URL=
 PUBLIC_MEMBERSHIP_DONATION_CUSTOM_URL=
 ```
+
+`PUBLIC_DONATION_URL` is the simplest option: it connects every donation button to one secure
+fundraising page where the donor chooses an amount. The amount-specific variables override that
+fallback when separate payment links are available.
 
 When these are empty, the membership page shows the contribution options as "Coming soon" and routes people to membership interest signup.
 
