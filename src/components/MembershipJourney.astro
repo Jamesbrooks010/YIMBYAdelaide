@@ -1,0 +1,136 @@
+---
+import SignupForm from '@/components/SignupForm.astro'
+---
+
+<section class="membership-journey" id="become-a-member" data-membership-journey aria-labelledby="membership-journey-title">
+  <div class="membership-journey__intro">
+    <p class="eyebrow">Become a Member</p>
+    <h2 id="membership-journey-title">A clear path to membership.</h2>
+    <p>
+      Learn what membership means, review YIMBY Adelaide’s draft probity commitments, and then
+      provide your member details.
+    </p>
+  </div>
+
+  <ol class="membership-journey__steps" aria-label="Membership journey progress">
+    <li data-journey-indicator aria-current="step"><span>1</span><strong>Membership</strong></li>
+    <li data-journey-indicator><span>2</span><strong>Probity</strong></li>
+    <li data-journey-indicator><span>3</span><strong>Your details</strong></li>
+  </ol>
+
+  <div class="membership-journey__panel" data-journey-panel>
+    <div class="membership-journey__card">
+      <p class="eyebrow">Step 1 of 3</p>
+      <h3>What membership means</h3>
+      <p>
+        Members make a deeper commitment to YIMBY Adelaide than email subscribers. They help build
+        a durable, independent organisation and strengthen its voice in public debate.
+      </p>
+      <ul class="membership-journey__list">
+        <li>Support the case for more homes and better housing choices.</li>
+        <li>Help shape priorities, campaigns, events, and submissions.</li>
+        <li>Participate constructively and treat other members with respect.</li>
+        <li>Protect the organisation’s independence and public trust.</li>
+      </ul>
+      <div class="membership-journey__actions">
+        <button class="button" type="button" data-journey-next>Review the probity commitments</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="membership-journey__panel" data-journey-panel hidden>
+    <div class="membership-journey__card">
+      <p class="eyebrow">Step 2 of 3</p>
+      <h3>Draft probity commitments</h3>
+      <p>
+        These principles are a working draft for review. Final membership rules will be approved
+        and published before this acknowledgement becomes part of the member record.
+      </p>
+      <fieldset class="membership-journey__checks">
+        <legend>Please acknowledge each draft commitment to continue.</legend>
+        <label>
+          <input type="checkbox" data-probity-checkbox />
+          <span>I support transparent, evidence-led, and non-partisan housing advocacy.</span>
+        </label>
+        <label>
+          <input type="checkbox" data-probity-checkbox />
+          <span>I will disclose relevant actual or potential conflicts of interest.</span>
+        </label>
+        <label>
+          <input type="checkbox" data-probity-checkbox />
+          <span>I will not seek special treatment or influence for a personal or financial interest.</span>
+        </label>
+        <label>
+          <input type="checkbox" data-probity-checkbox />
+          <span>I understand that the final membership and donations policy is still to be approved.</span>
+        </label>
+      </fieldset>
+      <p class="membership-journey__status" data-probity-status role="status" aria-live="polite">
+        Acknowledge all four commitments to continue.
+      </p>
+      <div class="membership-journey__actions">
+        <button class="button button--secondary" type="button" data-journey-back>Back</button>
+        <button class="button" type="button" data-journey-next disabled>Continue to your details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="membership-journey__panel" data-journey-panel hidden>
+    <div class="membership-journey__details-copy">
+      <p class="eyebrow">Step 3 of 3</p>
+      <h3>Your member details</h3>
+      <p>
+        Complete the separate membership form so member records remain distinct from the general
+        email list. We will follow up with the next steps for membership.
+      </p>
+      <p class="membership-journey__integration-note">
+        The draft probity acknowledgements are not yet written to Action Network. That connection
+        will be added after the final policy wording and custom fields are approved.
+      </p>
+      <button class="membership-journey__back-link" type="button" data-journey-back>← Review probity commitments</button>
+    </div>
+    <SignupForm compact form="membership" />
+  </div>
+</section>
+
+<script>
+  function initialiseMembershipJourney(journey: HTMLElement) {
+    const panels = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-panel]'))
+    const indicators = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-indicator]'))
+    const checkboxes = Array.from(journey.querySelectorAll<HTMLInputElement>('[data-probity-checkbox]'))
+    const probityNext = panels[1]?.querySelector<HTMLButtonElement>('[data-journey-next]')
+    const status = journey.querySelector<HTMLElement>('[data-probity-status]')
+    let activeStep = 0
+
+    const showStep = (step: number) => {
+      activeStep = Math.max(0, Math.min(step, panels.length - 1))
+      panels.forEach((panel, index) => { panel.hidden = index !== activeStep })
+      indicators.forEach((indicator, index) => {
+        if (index === activeStep) indicator.setAttribute('aria-current', 'step')
+        else indicator.removeAttribute('aria-current')
+      })
+      journey.scrollIntoView({behavior: 'smooth', block: 'start'})
+    }
+
+    const updateProbityState = () => {
+      const acknowledged = checkboxes.every((checkbox) => checkbox.checked)
+      if (probityNext) probityNext.disabled = !acknowledged
+      if (status) {
+        status.textContent = acknowledged
+          ? 'All draft commitments acknowledged.'
+          : 'Acknowledge all four commitments to continue.'
+      }
+    }
+
+    journey.querySelectorAll<HTMLButtonElement>('[data-journey-next]').forEach((button) => {
+      button.addEventListener('click', () => showStep(activeStep + 1))
+    })
+    journey.querySelectorAll<HTMLButtonElement>('[data-journey-back]').forEach((button) => {
+      button.addEventListener('click', () => showStep(activeStep - 1))
+    })
+    checkboxes.forEach((checkbox) => checkbox.addEventListener('change', updateProbityState))
+    updateProbityState()
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-membership-journey]').forEach(initialiseMembershipJourney)
+</script>
