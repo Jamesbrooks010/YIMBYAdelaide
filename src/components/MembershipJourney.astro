@@ -47,11 +47,7 @@ import SignupForm from '@/components/SignupForm.astro'
         and published before this acknowledgement becomes part of the member record.
       </p>
       <fieldset class="membership-journey__checks">
-        <legend>Please acknowledge each draft commitment to continue.</legend>
-        <label>
-          <input type="checkbox" data-probity-checkbox />
-          <span>I support transparent, evidence-led, and non-partisan housing advocacy.</span>
-        </label>
+        <legend>Please acknowledge both draft commitments to continue.</legend>
         <label>
           <input type="checkbox" data-probity-checkbox />
           <span>I will disclose relevant actual or potential conflicts of interest.</span>
@@ -60,13 +56,9 @@ import SignupForm from '@/components/SignupForm.astro'
           <input type="checkbox" data-probity-checkbox />
           <span>I will not seek special treatment or influence for a personal or financial interest.</span>
         </label>
-        <label>
-          <input type="checkbox" data-probity-checkbox />
-          <span>I understand that the final membership and donations policy is still to be approved.</span>
-        </label>
       </fieldset>
       <p class="membership-journey__status" data-probity-status role="status" aria-live="polite">
-        Acknowledge all four commitments to continue.
+        Acknowledge both commitments to continue.
       </p>
       <div class="membership-journey__actions">
         <button class="button button--secondary" type="button" data-journey-back>Back</button>
@@ -118,7 +110,7 @@ import SignupForm from '@/components/SignupForm.astro'
       if (status) {
         status.textContent = acknowledged
           ? 'All draft commitments acknowledged.'
-          : 'Acknowledge all four commitments to continue.'
+          : 'Acknowledge both commitments to continue.'
       }
     }
 
