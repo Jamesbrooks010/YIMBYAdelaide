@@ -979,7 +979,7 @@ textarea:focus {
   box-shadow: var(--shadow);
 }
 
-.membership-journey__panel:last-child {
+.membership-journey__panel#details-step {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(340px, 1fr);
   gap: clamp(1.5rem, 5vw, 4rem);
@@ -988,7 +988,7 @@ textarea:focus {
 }
 
 .membership-journey__panel[hidden] {
-  display: none;
+  display: none !important;
 }
 
 .membership-journey__card {
@@ -996,8 +996,8 @@ textarea:focus {
   padding: clamp(1.25rem, 4vw, 2.25rem);
 }
 
-.membership-journey__card h3,
-.membership-journey__details-copy h3 {
+.membership-journey__card h2,
+.membership-journey__details-copy h2 {
   font-size: clamp(1.8rem, 4vw, 2.8rem);
 }
 
@@ -1017,6 +1017,11 @@ textarea:focus {
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.5rem;
+}
+
+.membership-journey__actions--details {
+  grid-column: 1 / -1;
+  margin-top: 0;
 }
 
 .membership-journey__actions button:disabled {
@@ -1168,7 +1173,7 @@ textarea:focus {
   .planning-map__intro,
   .signup-band,
   .application-band,
-  .membership-journey__panel:last-child,
+  .membership-journey__panel#details-step,
   .member-options,
   .contact-grid {
     grid-template-columns: 1fr;
