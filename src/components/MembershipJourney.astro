@@ -13,12 +13,24 @@ import SignupForm from '@/components/SignupForm.astro'
   </div>
 
   <ol class="membership-journey__steps" aria-label="Membership journey progress">
-    <li data-journey-indicator aria-current="step"><span>1</span><strong>Membership</strong></li>
-    <li data-journey-indicator><span>2</span><strong>Probity</strong></li>
-    <li data-journey-indicator><span>3</span><strong>Your details</strong></li>
+    <li data-journey-indicator aria-current="step">
+      <button type="button" data-journey-step="0" aria-controls="membership-step">
+        <span>1</span><strong>Membership</strong>
+      </button>
+    </li>
+    <li data-journey-indicator>
+      <button type="button" data-journey-step="1" aria-controls="probity-step">
+        <span>2</span><strong>Probity</strong>
+      </button>
+    </li>
+    <li data-journey-indicator>
+      <button type="button" data-journey-step="2" aria-controls="details-step" disabled>
+        <span>3</span><strong>Your details</strong>
+      </button>
+    </li>
   </ol>
 
-  <div class="membership-journey__panel" data-journey-panel>
+  <div class="membership-journey__panel" id="membership-step" data-journey-panel>
     <div class="membership-journey__card">
       <p class="eyebrow">Step 1 of 3</p>
       <h3>What membership means</h3>
@@ -38,7 +50,7 @@ import SignupForm from '@/components/SignupForm.astro'
     </div>
   </div>
 
-  <div class="membership-journey__panel" data-journey-panel hidden>
+  <div class="membership-journey__panel" id="probity-step" data-journey-panel hidden>
     <div class="membership-journey__card">
       <p class="eyebrow">Step 2 of 3</p>
       <h3>Draft probity commitments</h3>
@@ -67,7 +79,7 @@ import SignupForm from '@/components/SignupForm.astro'
     </div>
   </div>
 
-  <div class="membership-journey__panel" data-journey-panel hidden>
+  <div class="membership-journey__panel" id="details-step" data-journey-panel hidden>
     <div class="membership-journey__details-copy">
       <p class="eyebrow">Step 3 of 3</p>
       <h3>Your member details</h3>
@@ -91,6 +103,7 @@ import SignupForm from '@/components/SignupForm.astro'
     const indicators = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-indicator]'))
     const checkboxes = Array.from(journey.querySelectorAll<HTMLInputElement>('[data-probity-checkbox]'))
     const probityNext = panels[1]?.querySelector<HTMLButtonElement>('[data-journey-next]')
+    const detailsStep = journey.querySelector<HTMLButtonElement>('[data-journey-step="2"]')
     const status = journey.querySelector<HTMLElement>('[data-probity-status]')
     let activeStep = 0
 
@@ -107,6 +120,7 @@ import SignupForm from '@/components/SignupForm.astro'
     const updateProbityState = () => {
       const acknowledged = checkboxes.every((checkbox) => checkbox.checked)
       if (probityNext) probityNext.disabled = !acknowledged
+      if (detailsStep) detailsStep.disabled = !acknowledged
       if (status) {
         status.textContent = acknowledged
           ? 'All draft commitments acknowledged.'
@@ -119,6 +133,9 @@ import SignupForm from '@/components/SignupForm.astro'
     })
     journey.querySelectorAll<HTMLButtonElement>('[data-journey-back]').forEach((button) => {
       button.addEventListener('click', () => showStep(activeStep - 1))
+    })
+    journey.querySelectorAll<HTMLButtonElement>('[data-journey-step]').forEach((button) => {
+      button.addEventListener('click', () => showStep(Number(button.dataset.journeyStep)))
     })
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', updateProbityState))
     updateProbityState()
