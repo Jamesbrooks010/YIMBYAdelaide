@@ -591,11 +591,9 @@ h3 {
 .page-hero--membership {
   color: var(--white);
   background:
-    linear-gradient(90deg, rgba(8, 38, 26, 0.9), rgba(8, 38, 26, 0.58) 56%, rgba(8, 38, 26, 0.2)),
-    linear-gradient(0deg, rgba(8, 38, 26, 0.65), rgba(8, 38, 26, 0.08)),
-    var(--skyline-image);
-  background-position: center;
-  background-size: cover;
+    radial-gradient(circle at 82% 18%, rgba(242, 140, 0, 0.34), transparent 24%),
+    radial-gradient(circle at 86% 82%, rgba(7, 136, 181, 0.5), transparent 34%),
+    linear-gradient(135deg, #005d31 0%, var(--yimby-green) 55%, #057da5 100%);
 }
 
 .page-hero--membership p {
@@ -815,7 +813,7 @@ textarea:focus {
   font-weight: 900;
 }
 
-.membership-flow a {
+.membership-flow a:not(.button) {
   color: var(--yimby-green);
   font-weight: 900;
 }

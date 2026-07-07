@@ -26,15 +26,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <section class="section membership-flow" id="membership-flow" aria-label="Membership flow">
       <article>
         <span>1</span>
-        <h3>Subscribe for updates</h3>
-        <p>Use Action Network to receive emails, campaign actions, and membership launch news.</p>
-        <a href="#email-updates">Email signup</a>
+        <h3>Become a member</h3>
+        <p>Use the separate membership form so we can keep member records distinct from email subscribers.</p>
+        <a class="button" href={`${base}member-signup/`}>Start membership signup</a>
       </article>
       <article>
         <span>2</span>
-        <h3>Become a member</h3>
-        <p>Use the separate membership form so we can keep member records distinct from email subscribers.</p>
-        <a href={`${base}member-signup/`}>Start membership signup</a>
+        <h3>Subscribe for updates</h3>
+        <p>Use Action Network to receive emails, campaign actions, and membership launch news.</p>
+        <a class="button button--secondary" href="#email-updates">Email signup</a>
       </article>
     </section>
 
