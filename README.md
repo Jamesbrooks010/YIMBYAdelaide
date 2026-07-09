@@ -17,6 +17,11 @@ npm run dev
 
 The Astro site runs at `http://localhost:4321`.
 
+## Deployment
+
+The site currently deploys to GitHub Pages through `.github/workflows/deploy-pages.yml`.
+For the purchased `yimbyadelaide.com` domain, see `docs/custom-domain-hosting.md`.
+
 To run Sanity Studio:
 
 ```powershell
