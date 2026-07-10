@@ -752,7 +752,15 @@ textarea:focus {
 }
 
 .action-network-signup .signup-form__fallback {
-  color: var(--ink);
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+
+.action-network-signup .signup-form__fallback a {
+  color: var(--ink) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 
 .action-network-signup #can_embed_form,
