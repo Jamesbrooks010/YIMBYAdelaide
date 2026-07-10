@@ -751,6 +751,10 @@ textarea:focus {
   color: var(--ink);
 }
 
+.action-network-signup .signup-form__fallback {
+  color: var(--ink);
+}
+
 .action-network-signup #can_embed_form,
 .action-network-signup .can_embed {
   font-family:
