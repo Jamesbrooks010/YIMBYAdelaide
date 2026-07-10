@@ -39,8 +39,8 @@ SANITY_STUDIO_PROJECT_ID=your-project-id
 SANITY_STUDIO_DATASET=production
 PUBLIC_ACTION_NETWORK_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/sign-up-to-yimby-adelaide?format=js&source=widget
 PUBLIC_ACTION_NETWORK_TARGET_ID=can-form-area-sign-up-to-yimby-adelaide
-PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget
-PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-become-a-member-of-yimby-adelaide
+PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/stay-updated-with-yimby-adelaide?format=js&source=widget
+PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-stay-updated-with-yimby-adelaide
 PUBLIC_DONATION_URL=
 PUBLIC_MEMBERSHIP_DONATION_25_URL=
 PUBLIC_MEMBERSHIP_DONATION_50_URL=
@@ -66,8 +66,8 @@ The full embed snippet from Action Network includes a stylesheet, a script, and 
 The membership page uses a separate Action Network form:
 
 ```text
-PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget
-PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-become-a-member-of-yimby-adelaide
+PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL=https://actionnetwork.org/widgets/v6/form/stay-updated-with-yimby-adelaide?format=js&source=widget
+PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID=can-form-area-stay-updated-with-yimby-adelaide
 ```
 
 ## Membership Donation Links

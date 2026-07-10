@@ -18,11 +18,11 @@ const embeds = {
   membership: {
     scriptUrl:
       import.meta.env.PUBLIC_ACTION_NETWORK_MEMBERSHIP_SCRIPT_URL ||
-      'https://actionnetwork.org/widgets/v6/form/become-a-member-of-yimby-adelaide?format=js&source=widget',
+      'https://actionnetwork.org/widgets/v6/form/stay-updated-with-yimby-adelaide?format=js&source=widget',
     targetId:
       import.meta.env.PUBLIC_ACTION_NETWORK_MEMBERSHIP_TARGET_ID ||
-      'can-form-area-become-a-member-of-yimby-adelaide',
-    pageUrl: 'https://actionnetwork.org/forms/become-a-member-of-yimby-adelaide'
+      'can-form-area-stay-updated-with-yimby-adelaide',
+    pageUrl: 'https://actionnetwork.org/forms/stay-updated-with-yimby-adelaide'
   }
 }
 const actionNetworkEmbed = {
@@ -34,7 +34,7 @@ const actionNetworkEmbed = {
 {
   actionNetworkEmbed ? (
     <div class:list={['signup-form action-network-signup', compact && 'signup-form--compact']}>
-      <link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
+      <link href="https://actionnetwork.org/css/style-embed-whitelabel-v3.css" rel="stylesheet" type="text/css" />
       <script is:inline src={actionNetworkEmbed.scriptUrl}></script>
       <div id={actionNetworkEmbed.targetId} style="width: 100%">
         <!-- Action Network inserts the embedded form here. -->
