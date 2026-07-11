@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
 
 const contactEmail = 'info@yimbyadelaide.com'
+const contactFormEndpoint = `https://formsubmit.co/ajax/${contactEmail}`
 ---
 
 <BaseLayout
@@ -23,10 +24,16 @@ const contactEmail = 'info@yimbyadelaide.com'
       <form
         class="contact-form"
         id="contact-message-form"
-        action={`mailto:${contactEmail}`}
+        action={contactFormEndpoint}
         method="post"
-        enctype="text/plain"
       >
+        <input type="hidden" name="_subject" value="New message from YIMBY Adelaide website" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <label class="contact-form__honeypot" aria-hidden="true">
+          <span>Website</span>
+          <input name="_honey" type="text" tabindex="-1" autocomplete="off" />
+        </label>
         <label>
           <span>Name</span>
           <input name="name" type="text" autocomplete="name" required />
@@ -39,7 +46,7 @@ const contactEmail = 'info@yimbyadelaide.com'
           <span>Message</span>
           <textarea name="message" rows="7" required></textarea>
         </label>
-        <button type="submit">Send message</button>
+        <button type="submit" data-contact-submit>Send message</button>
         <p class="contact-form__status" data-contact-status aria-live="polite"></p>
       </form>
 
@@ -59,8 +66,9 @@ const contactEmail = 'info@yimbyadelaide.com'
   <script>
     const contactForm = document.querySelector('#contact-message-form')
     const contactStatus = document.querySelector('[data-contact-status]')
+    const contactSubmit = document.querySelector('[data-contact-submit]')
 
-    contactForm?.addEventListener('submit', (event) => {
+    contactForm?.addEventListener('submit', async (event) => {
       event.preventDefault()
 
       if (!(contactForm instanceof HTMLFormElement) || !contactForm.reportValidity()) {
@@ -68,23 +76,43 @@ const contactEmail = 'info@yimbyadelaide.com'
       }
 
       const formData = new FormData(contactForm)
-      const name = String(formData.get('name') || '').trim()
-      const email = String(formData.get('email') || '').trim()
-      const message = String(formData.get('message') || '').trim()
-      const subject = `Message from ${name || 'YIMBY Adelaide website'}`
-      const body = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        '',
-        message
-      ].join('\n')
 
       if (contactStatus) {
-        contactStatus.textContent =
-          'Opening your email app. If nothing opens, email info@yimbyadelaide.com directly.'
+        contactStatus.textContent = 'Sending your message...'
       }
 
-      window.location.href = `mailto:info@yimbyadelaide.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      if (contactSubmit instanceof HTMLButtonElement) {
+        contactSubmit.disabled = true
+      }
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json'
+          }
+        })
+
+        if (!response.ok) {
+          throw new Error('Contact form submission failed')
+        }
+
+        contactForm.reset()
+
+        if (contactStatus) {
+          contactStatus.textContent = 'Thanks, your message has been sent.'
+        }
+      } catch {
+        if (contactStatus) {
+          contactStatus.textContent =
+            'Sorry, something went wrong. Please email info@yimbyadelaide.com directly.'
+        }
+      } finally {
+        if (contactSubmit instanceof HTMLButtonElement) {
+          contactSubmit.disabled = false
+        }
+      }
     })
   </script>
 </BaseLayout>
