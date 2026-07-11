@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import SignupForm from '@/components/SignupForm.astro'
+
+const contactEmail = 'info@yimbyadelaide.com'
 ---
 
 <BaseLayout
@@ -18,8 +20,13 @@ import SignupForm from '@/components/SignupForm.astro'
     </section>
 
     <section class="section contact-grid">
-      <form class="contact-form" name="contact" method="post" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
+      <form
+        class="contact-form"
+        id="contact-message-form"
+        action={`mailto:${contactEmail}`}
+        method="post"
+        enctype="text/plain"
+      >
         <label>
           <span>Name</span>
           <input name="name" type="text" autocomplete="name" required />
@@ -33,12 +40,13 @@ import SignupForm from '@/components/SignupForm.astro'
           <textarea name="message" rows="7" required></textarea>
         </label>
         <button type="submit">Send message</button>
+        <p class="contact-form__status" data-contact-status aria-live="polite"></p>
       </form>
 
       <aside class="contact-aside">
         <div>
           <p class="eyebrow">Email</p>
-          <a href="mailto:info@yimbyadelaide.com">info@yimbyadelaide.com</a>
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
         </div>
         <div>
           <p class="eyebrow">Supporter Updates</p>
@@ -47,4 +55,36 @@ import SignupForm from '@/components/SignupForm.astro'
       </aside>
     </section>
   </main>
+
+  <script>
+    const contactForm = document.querySelector('#contact-message-form')
+    const contactStatus = document.querySelector('[data-contact-status]')
+
+    contactForm?.addEventListener('submit', (event) => {
+      event.preventDefault()
+
+      if (!(contactForm instanceof HTMLFormElement) || !contactForm.reportValidity()) {
+        return
+      }
+
+      const formData = new FormData(contactForm)
+      const name = String(formData.get('name') || '').trim()
+      const email = String(formData.get('email') || '').trim()
+      const message = String(formData.get('message') || '').trim()
+      const subject = `Message from ${name || 'YIMBY Adelaide website'}`
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        '',
+        message
+      ].join('\n')
+
+      if (contactStatus) {
+        contactStatus.textContent =
+          'Opening your email app. If nothing opens, email info@yimbyadelaide.com directly.'
+      }
+
+      window.location.href = `mailto:info@yimbyadelaide.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    })
+  </script>
 </BaseLayout>
