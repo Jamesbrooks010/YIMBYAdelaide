@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - codex/add-interactive-parcel-map
   workflow_dispatch:
 
 permissions:
