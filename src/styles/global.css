@@ -593,6 +593,136 @@ h3 {
     var(--sky);
 }
 
+.next-event {
+  width: min(900px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+
+.event-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  color: var(--white);
+  background: var(--adelaide-blue);
+}
+
+.event-icon svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.event-icon--pub {
+  color: var(--ink);
+  background: var(--sun-orange);
+}
+
+.event-icon--parking {
+  background: var(--yimby-green);
+}
+
+.events-more a {
+  color: var(--yimby-green);
+  font-weight: 900;
+}
+
+.happy-hour-feature,
+.briefing-feature {
+  display: grid;
+  grid-template-columns: auto minmax(0, 720px);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: start;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) max(1rem, calc((100% - 1120px) / 2));
+  background: var(--mist);
+}
+
+.happy-hour-feature {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.happy-hour-feature h2,
+.briefing-feature h2,
+.parking-preview h2 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.happy-hour-feature h2 {
+  max-width: 20ch;
+}
+
+.happy-hour-feature > div:last-child > p:not(.eyebrow) {
+  max-width: 58ch;
+  color: var(--muted);
+}
+
+.briefing-feature h2 {
+  max-width: 18ch;
+}
+
+.briefing-feature__byline {
+  color: var(--yimby-green);
+  font-weight: 900;
+}
+
+.briefing-feature > div:last-child > p:not(.eyebrow) {
+  max-width: 66ch;
+}
+
+.parking-preview {
+  display: grid;
+  grid-template-columns: auto minmax(0, 720px);
+  gap: 1.25rem;
+  align-items: start;
+  justify-content: center;
+  width: min(900px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+
+.parking-preview .event-icon {
+  width: 46px;
+  height: 46px;
+}
+
+.parking-preview h2 {
+  max-width: 20ch;
+}
+
+.parking-preview p:not(.eyebrow) {
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+}
+
+.parking-preview span {
+  color: var(--yimby-green);
+  font-size: 0.84rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.events-more {
+  padding: 1.25rem max(1rem, calc((100% - 1120px) / 2));
+  border-top: 1px solid var(--line);
+  background: var(--sky);
+  text-align: center;
+}
+
+.events-more p {
+  margin: 0;
+}
+
 .page-hero--membership {
   color: var(--white);
   background:
@@ -1183,9 +1313,12 @@ textarea:focus {
   .application-band,
   .membership-journey__panel#details-step,
   .member-options,
+  .happy-hour-feature,
+  .briefing-feature,
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
 
   .hero {
     min-height: auto;
@@ -1300,5 +1433,17 @@ textarea:focus {
   .membership-flow,
   .support-grid {
     grid-template-columns: 1fr;
+  }
+
+  .happy-hour-feature,
+  .briefing-feature,
+  .parking-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .happy-hour-feature .event-icon,
+  .briefing-feature .event-icon,
+  .parking-preview .event-icon {
+    margin-bottom: 0;
   }
 }

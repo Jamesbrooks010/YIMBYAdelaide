@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const eventUrl = 'https://actionnetwork.org/events/yimby-adelaide-happy-hour-august-knock-off-drinks?source=direct_link'
+const briefingUrl = 'https://actionnetwork.org/events/yimby-adelaide-zoning-atlas-briefing-presented-by-yimby-melbourne?source=linktree'
+---
+
+<BaseLayout
+  title="Events | YIMBY Adelaide"
+  description="Find upcoming YIMBY Adelaide events and join Adelaide's pro-housing community in person."
+>
+  <main>
+    <section class="page-hero page-hero--contact">
+      <p class="eyebrow">Next Event</p>
+      <h1>Join us at our next event</h1>
+      <p>
+        Meet fellow pro-housing Adelaideans at our August happy hour. View the event details and
+        RSVP through Action Network.
+      </p>
+    </section>
+
+    <section class="next-event" aria-label="Featured next event">
+      <div class="happy-hour-feature">
+        <div class="event-icon event-icon--pub" aria-hidden="true">
+          <svg viewBox="0 0 48 48" focusable="false">
+            <path d="M13 13h20v20a7 7 0 0 1-7 7h-6a7 7 0 0 1-7-7V13Z" />
+            <path d="M33 18h3a6 6 0 0 1 0 12h-3M17 9v4m7-6v6m7-4v4" />
+            <path d="M18 20h10" />
+          </svg>
+        </div>
+        <div>
+          <p class="eyebrow">Next Event</p>
+          <h2>YIMBY Adelaide Happy Hour: August Knock-Off Drinks</h2>
+          <p>Join YIMBY Adelaide for August knock-off drinks and a relaxed catch-up.</p>
+          <div class="actions">
+            <a class="text-link" href={eventUrl} target="_blank" rel="noopener noreferrer">
+              View details and RSVP <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="briefing-feature" aria-labelledby="briefing-heading">
+      <div class="briefing-feature__icon event-icon event-icon--screen" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false">
+          <rect x="8" y="10" width="32" height="23" rx="2" />
+          <path d="M19 40h10m-5-7v7M13 16h22" />
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">Also Coming Up</p>
+        <h2 id="briefing-heading">YIMBY Adelaide Zoning Atlas Briefing</h2>
+        <p class="briefing-feature__byline">Presented by YIMBY Melbourne.</p>
+        <p>
+          The Zoning Atlas makes planning and land-use controls easier to understand, showing how
+          the rules that shape our cities differ from place to place. This briefing will put
+          Adelaide in that broader context and help us compare how different cities make room for
+          homes and growth.
+        </p>
+        <div class="actions">
+          <a class="text-link" href={briefingUrl} target="_blank" rel="noopener noreferrer">
+            View details and RSVP <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="parking-preview" aria-labelledby="parking-heading">
+      <div class="event-icon event-icon--parking" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false">
+          <rect x="9" y="6" width="30" height="36" rx="4" />
+          <path d="M20 35V14h7a7 7 0 0 1 0 14h-7m0-7h7" />
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">On the Horizon</p>
+        <h2 id="parking-heading">Car Parking in Adelaide…</h2>
+        <p>More information coming soon.</p>
+        <span>Details to be announced</span>
+      </div>
+    </section>
+
+    <aside class="events-more" aria-label="More YIMBY Adelaide links">
+      <p>
+        Looking for more ways to connect?
+        <a href="https://linktr.ee/yimbyadelaide" target="_blank" rel="noopener noreferrer">
+          Visit YIMBY Adelaide on Linktree <span aria-hidden="true">↗</span>
+        </a>
+      </p>
+    </aside>
+  </main>
+</BaseLayout>
