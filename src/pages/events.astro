@@ -12,39 +12,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
       <p class="eyebrow">Next Event</p>
       <h1>Join us at our next event</h1>
       <p>
-        Join YIMBY Adelaide for a briefing on the Zoning Atlas, presented by YIMBY Melbourne.
+        Join YIMBY Adelaide for Wasted Space: Car Parking in Adelaide with Dom Betherens.
         View the event details and RSVP through Action Network.
       </p>
     </section>
 
-    <section class="briefing-feature" aria-labelledby="briefing-heading">
-      <div class="briefing-feature__icon event-icon event-icon--screen" aria-hidden="true">
-        <svg viewBox="0 0 48 48" focusable="false">
-          <rect x="8" y="10" width="32" height="23" rx="2" />
-          <path d="M19 40h10m-5-7v7M13 16h22" />
-        </svg>
-      </div>
-      <div>
-        <p class="eyebrow">Next Event</p>
-        <h2 id="briefing-heading">YIMBY Adelaide Zoning Atlas Briefing</h2>
-        <p class="briefing-feature__byline">Presented by YIMBY Melbourne.</p>
-        <p>
-          The Zoning Atlas makes planning and land-use controls easier to understand, showing how
-          the rules that shape our cities differ from place to place. This briefing will put
-          Adelaide in that broader context and help us compare how different cities make room for
-          homes and growth.
-        </p>
-        <div class="action-network-event">
-          <link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
-          <script is:inline src="https://actionnetwork.org/widgets/v6/event/yimby-adelaide-zoning-atlas-briefing-presented-by-yimby-melbourne?format=js&source=widget"></script>
-          <div id="can-event-area-yimby-adelaide-zoning-atlas-briefing-presented-by-yimby-melbourne" style="width: 100%">
-            <!-- Action Network inserts the embedded event here. -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="parking-preview" aria-labelledby="parking-heading">
+    <section class="briefing-feature" aria-labelledby="featured-event-heading">
       <div class="event-icon event-icon--parking" aria-hidden="true">
         <svg viewBox="0 0 48 48" focusable="false">
           <rect x="9" y="6" width="30" height="36" rx="4" />
@@ -52,10 +25,31 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
         </svg>
       </div>
       <div>
-        <p class="eyebrow">On the Horizon</p>
-        <h2 id="parking-heading">Car Parking in Adelaide…</h2>
-        <p>More information coming soon.</p>
-        <span>Details to be announced</span>
+        <p class="eyebrow">Next Event</p>
+        <h2 id="featured-event-heading">Wasted Space: Car Parking in Adelaide</h2>
+        <p class="briefing-feature__byline">With Dom Betherens.</p>
+        <div class="action-network-event">
+          <link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
+          <script is:inline src="https://actionnetwork.org/widgets/v6/event/wasted-space-car-parking-in-adelaide-with-dom-betherens?format=js&source=widget"></script>
+          <div id="can-event-area-wasted-space-car-parking-in-adelaide-with-dom-betherens" style="width: 100%">
+            <!-- Action Network inserts the embedded event here. -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="parking-preview" aria-labelledby="completed-event-heading">
+      <div class="event-icon event-icon--screen" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false">
+          <rect x="8" y="10" width="32" height="23" rx="2" />
+          <path d="M19 40h10m-5-7v7M13 16h22" />
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">Completed Event</p>
+        <h2 id="completed-event-heading">YIMBY Adelaide Zoning Atlas Briefing</h2>
+        <p>Presented by YIMBY Melbourne.</p>
+        <span>Event completed</span>
       </div>
     </section>
 
