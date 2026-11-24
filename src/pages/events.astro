@@ -12,12 +12,29 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
       <p class="eyebrow">Next Event</p>
       <h1>Join us at our next event</h1>
       <p>
-        Join YIMBY Adelaide for Wasted Space: Car Parking in Adelaide with Dominic Behrens.
-        View the event details and RSVP through Action Network.
+        Join YIMBY Adelaide for our final Knock-Off / Happy Hour drinks of 2026
+        at the Havelock Hotel. View the details below and RSVP through Action Network.
       </p>
     </section>
 
     <section class="briefing-feature" aria-labelledby="featured-event-heading">
+      <div class="event-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false">
+          <path d="M12 8h24l-3 17a9 9 0 0 1-18 0L12 8Zm12 26v8m-7 0h14M14 18h20" />
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">Next Event</p>
+        <h2 id="featured-event-heading">Final Knock-Off / Happy Hour Drinks</h2>
+        <p class="briefing-feature__byline">Friday 27 November 2026, 5:30 pm.</p>
+        <p>Havelock Hotel (General Havelock), 162 Hutt Street, Adelaide.</p>
+        <p>Wrap up the year with food, drinks, and a chat about more homes for Adelaide.
+          Bring your friends and your ideas — everyone is welcome.</p>
+        <a class="button" href="https://actionnetwork.org/events/yimby-adelaide-november-knock-off-drinks" target="_blank" rel="noopener noreferrer">RSVP on Action Network</a>
+      </div>
+    </section>
+
+    <section class="parking-preview" aria-labelledby="completed-parking-heading">
       <div class="event-icon event-icon--parking" aria-hidden="true">
         <svg viewBox="0 0 48 48" focusable="false">
           <rect x="9" y="6" width="30" height="36" rx="4" />
@@ -25,16 +42,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
         </svg>
       </div>
       <div>
-        <p class="eyebrow">Next Event</p>
-        <h2 id="featured-event-heading">Wasted Space: Car Parking in Adelaide</h2>
-        <p class="briefing-feature__byline">With Dominic Behrens.</p>
-        <div class="action-network-event">
-          <link href="https://actionnetwork.org/css/style-embed-v3.css" rel="stylesheet" type="text/css" />
-          <script is:inline src="https://actionnetwork.org/widgets/v6/event/wasted-space-car-parking-in-adelaide-with-dom-betherens?format=js&source=widget"></script>
-          <div id="can-event-area-wasted-space-car-parking-in-adelaide-with-dom-betherens" style="width: 100%">
-            <!-- Action Network inserts the embedded event here. -->
-          </div>
-        </div>
+        <p class="eyebrow">Completed Event</p>
+        <h2 id="completed-parking-heading">Wasted Space: Car Parking in Adelaide</h2>
+        <p>With Dominic Behrens. Friday 16 October 2026.</p>
+        <span>Event completed</span>
       </div>
     </section>
 
